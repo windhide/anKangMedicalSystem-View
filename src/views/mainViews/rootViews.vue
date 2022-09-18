@@ -79,10 +79,16 @@
 
       <el-main>
         <el-scrollbar>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="Date" width="140" />
-            <el-table-column prop="name" label="Name" width="120" />
-            <el-table-column prop="address" label="Address" />
+          <el-table :data="drugsList">
+            <el-table-column prop="drugsId" label="药Id" width="100" />
+            <el-table-column prop="drugsName" label="药名" width="400" />
+            <el-table-column prop="drugsType.drugsTypeName" label="类型" width="100" />
+            <el-table-column prop="drugsSpecifications" label="规格" width="150"/>
+            <el-table-column prop="drugsUnit.drugsUnitName" label="单位"  width="100"/>
+            <el-table-column prop="drugsPlace" label="产地" width="300"/>
+            <el-table-column prop="drugsOriginPrice" label="原始价格" width="100" />
+            <el-table-column prop="drugsRetailPrice" label="零售价" width="100"/>
+            <el-table-column prop="drugsCreatTime" label="录入时间" />
           </el-table>
         </el-scrollbar>
       </el-main>
@@ -91,15 +97,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import {QUERY_DRUGS_FOR_LIST} from "@/apis/Drugs_Request"
+
 
 const item = {
   date: '2016-05-02',
   name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles',
+  address: 'No. 189, Grove St, Los Angeles'
 }
-const tableData = ref(Array.from({ length: 20 }).fill(item))
+
+const drugsList:any = reactive([])
+
+QUERY_DRUGS_FOR_LIST().then(res =>{
+  drugsList.push(...res);
+})
 </script>
 
 <style scoped>
