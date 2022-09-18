@@ -5,7 +5,7 @@ module.exports = defineConfig({
 module.exports = { 
     devServer: {
         open: false,
-        port: 8081, //端口
+        port: 80, //端口
         proxy: {
             '/api': {
                 target: 'http://192.168.190.130:10010/', // 服务器server
