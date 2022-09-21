@@ -98,12 +98,13 @@
             <el-table-column fixed="right" label="操作">
               <template #default="scope">
                 <el-button type="primary" :icon="Edit" circle />
-                <el-button type="danger" :icon="Delete" circle  @click="CURRENCY_DELETE_REQUEST('drugs',scope.row.drugsId)" />
+                <el-button type="danger" :icon="Delete" circle
+                  @click="DELETE(scope.row.drugsName,'drugs',scope.row.drugsId)" />
               </template>
             </el-table-column>
           </el-table>
-          <el-pagination background :page-size="pageSize" layout="prev, pager, next"
-            :total="totals" @current-change="handleSizeChange" />
+          <el-pagination background :page-size="pageSize" layout="prev, pager, next" :total="totals"
+            @current-change="handleSizeChange" />
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -114,23 +115,26 @@
 import { reactive, ref } from 'vue'
 import { Menu as IconMenu, Message, Setting, Delete, Edit } from '@element-plus/icons-vue'
 import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
-import { CURRENCY_DELETE_REQUEST } from "@/apis/RudRequestApis"
-
-
+import { CURRENCY_DELETE } from "@/apis/FormRudApis"
 
 
 let drugsList: any = reactive([])
 let pageSize = ref(1); // 给初始值
 let totals = ref(1); // 给初始值
+let nowPage = ref(1);
 
+async function DELETE(Title: String, url: String, id: number) {
+  await CURRENCY_DELETE(Title, url, id)
+  handleSizeChange(nowPage.value)
+};
 
-
-const handleSizeChange = (val: number) => {
+function handleSizeChange(val: number) {
   QUERY_DRUGS_FOR_LIST(val).then(res => {
-    drugsList.length = 0;
-    pageSize.value = res.size;
-    totals.value = res.total;
-    drugsList.push(...res.data);
+    drugsList.length = 0
+    nowPage.value = val
+    pageSize.value = res.size
+    totals.value = res.total
+    drugsList.push(...res.data)
   })
 };
 
