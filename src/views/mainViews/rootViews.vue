@@ -84,8 +84,8 @@
       </el-header>
 
       <el-main>
-        <el-scrollbar>
-          <el-table :data="drugsList" max-height="600">
+        <el-scrollbar style="margin:0 auto">
+          <el-table :data="drugsList" max-height="700">
             <!-- <el-table-column prop="drugsId" label="药Id" width="100" /> -->
             <el-table-column prop="drugsName" label="药名" width="350" />
             <el-table-column prop="drugsType.drugsTypeName" label="类型" width="100" />
@@ -101,8 +101,8 @@
                 <el-button type="danger" :icon="Delete" circle />
               </template>
             </el-table-column>
-          </el-table>
-          <el-pagination background :page-size="pageSize" layout="prev, pager, next" :total="totals" @current-change="handleSizeChange" />
+          </el-table> 
+          <el-pagination style="margin:0 auto" background :page-size="pageSize" layout="prev, pager, next" :total="totals" @current-change="handleSizeChange" />
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -120,20 +120,17 @@ let drugsList: any = reactive([])
 let pageSize = ref(String);
 let totals = ref(String);
 
-QUERY_DRUGS_FOR_LIST(1).then(res => {
-  drugsList.push(...res.data);
-  pageSize.value = res.size;
-  totals.value = res.total;
-  console.log(res.size)
-  console.log(res.total)
-})
 
 const handleSizeChange = (val: number) => {
   QUERY_DRUGS_FOR_LIST(val).then(res => {
     drugsList.length = 0;
+    pageSize.value = res.size;
+    totals.value = res.total;
     drugsList.push(...res.data);
   })
-}
+};
+
+handleSizeChange(1);
 
 </script>
 
