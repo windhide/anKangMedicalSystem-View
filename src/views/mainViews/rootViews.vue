@@ -84,7 +84,7 @@
       </el-header>
 
       <el-main>
-        <el-scrollbar style="margin:0 auto">
+        <el-scrollbar>
           <el-table :data="drugsList" max-height="700">
             <!-- <el-table-column prop="drugsId" label="药Id" width="100" /> -->
             <el-table-column prop="drugsName" label="药名" width="350" />
@@ -98,11 +98,12 @@
             <el-table-column fixed="right" label="操作">
               <template #default="scope">
                 <el-button type="primary" :icon="Edit" circle />
-                <el-button type="danger" :icon="Delete" circle />
+                <el-button type="danger" :icon="Delete" circle  @click="CURRENCY_DELETE_REQUEST('drugs',scope.row.drugsId)" />
               </template>
             </el-table-column>
-          </el-table> 
-          <el-pagination style="margin:0 auto" background :page-size="pageSize" layout="prev, pager, next" :total="totals" @current-change="handleSizeChange" />
+          </el-table>
+          <el-pagination background :page-size="pageSize" layout="prev, pager, next"
+            :total="totals" @current-change="handleSizeChange" />
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -113,12 +114,15 @@
 import { reactive, ref } from 'vue'
 import { Menu as IconMenu, Message, Setting, Delete, Edit } from '@element-plus/icons-vue'
 import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
+import { CURRENCY_DELETE_REQUEST } from "@/apis/RudRequestApis"
+
 
 
 
 let drugsList: any = reactive([])
-let pageSize = ref(String);
-let totals = ref(String);
+let pageSize = ref(1); // 给初始值
+let totals = ref(1); // 给初始值
+
 
 
 const handleSizeChange = (val: number) => {
@@ -130,7 +134,7 @@ const handleSizeChange = (val: number) => {
   })
 };
 
-handleSizeChange(1);
+handleSizeChange(1); // 初始化数据
 
 </script>
 
