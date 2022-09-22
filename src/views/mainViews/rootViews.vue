@@ -97,7 +97,7 @@
             <el-table-column prop="drugsCreatTime" label="录入时间" width="320" />
             <el-table-column fixed="right" label="操作">
               <template #default="scope">
-                <el-button type="primary" :icon="Edit" circle />
+                <el-button type="primary" :icon="Edit" circle @click="EDIT(scope.row,'drugs',scope.row.drugsId)" />
                 <el-button type="danger" :icon="Delete" circle
                   @click="DELETE(scope.row.drugsName,'drugs',scope.row.drugsId)" />
               </template>
@@ -115,7 +115,7 @@
 import { reactive, ref } from 'vue'
 import { Menu as IconMenu, Message, Setting, Delete, Edit } from '@element-plus/icons-vue'
 import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
-import { CURRENCY_DELETE } from "@/apis/FormRudApis"
+import { CURRENCY_DELETE, CURRENCY_EDIT } from "@/apis/FormRudApis"
 
 
 let drugsList: any = reactive([])
@@ -126,7 +126,12 @@ let nowPage = ref(1);
 async function DELETE(Title: String, url: String, id: number) {
   await CURRENCY_DELETE(Title, url, id)
   handleSizeChange(nowPage.value)
-};
+}
+
+async function EDIT(Title: String, url: String, id: number) {
+  await CURRENCY_EDIT(Title, url, id)
+  handleSizeChange(nowPage.value)
+}
 
 function handleSizeChange(val: number) {
   QUERY_DRUGS_FOR_LIST(val).then(res => {
