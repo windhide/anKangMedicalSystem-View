@@ -25,3 +25,28 @@ export async function CURRENCY_DELETE(Title: String, url: String, id: number) {
         })
     })
 }
+
+export async function CURRENCY_EDIT(Title: String, url: String, data: any) {
+    await ElMessageBox.confirm(
+        '确认修改吗?',
+        '修改确认',
+        {
+            confirmButtonText: '修改',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    ).then(() => {
+        axios.post(url + "/update",data).then((res: any) => {
+            if (res.data == true) {
+                ElMessage({ type: 'success', message: '修改成功' })
+            } else {
+                ElMessage({ type: 'error', message: '因为服务器原因修改失败!' })
+            }
+        })
+    }).catch(() => {
+        ElMessage({
+            type: 'info',
+            message: '取消操作',
+        })
+    })
+}
