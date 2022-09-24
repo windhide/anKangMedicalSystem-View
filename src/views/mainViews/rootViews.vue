@@ -217,12 +217,15 @@ async function EDIT(url: String, data: any) {
     drugsForm.drugsRetailPrice = data.drugsRetailPrice
     drugsForm.drugsCreatTime = data.drugsCreatTime
   }
-  
+
   EDIT_DIALOG.value = !EDIT_DIALOG.value;
 
-  if(!EDIT_DIALOG.value || data == 'null'){
+  if(!EDIT_DIALOG.value && data == 'null'){
     await CURRENCY_EDIT(url, drugsForm)
-    await handleSizeChange(nowPage.value)
+    setTimeout(() => {
+      handleSizeChange(nowPage.value)
+    }, 100);
+    // 设置延时让后台及时更新数据后重新加载
   }
 }
 
