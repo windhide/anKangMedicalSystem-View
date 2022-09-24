@@ -97,7 +97,7 @@
             <el-table-column prop="drugsCreatTime" label="录入时间" width="320" />
             <el-table-column fixed="right" label="操作">
               <template #default="scope">
-                <el-button type="primary" :icon="Edit" circle @click="EDIT(scope.row,'drugs',scope.row)" />
+                <el-button type="primary" :icon="Edit" circle @click="EDIT('drugs',scope.row)" />
                 <el-button type="danger" :icon="Delete" circle
                   @click="DELETE(scope.row.drugsName,'drugs',scope.row.drugsId)" />
               </template>
@@ -115,14 +115,14 @@
 
   <el-dialog v-model="EDIT_DIALOG" title="药物修改" width="30%" align-center>
     <el-form :model="drugsForm">
-      <el-input v-model="drugsForm.drugsId"  hidden />
       <el-form-item label="药名" :label-width="formLabelWidth">
         <el-input v-model="drugsForm.drugsName" autocomplete="off" />
       </el-form-item>
       <el-form-item label="药品类型" :label-width="formLabelWidth">
         <el-select v-model="drugsForm.drugsTypeId" placeholder="选择药品类型">
-          <el-option label="Zone No.1" value="shanghai" />
-          <el-option label="Zone No.2" value="beijing" />
+          <div v-for="drugsTypeOption in drugsType">
+            <el-option :label=drugsTypeOption.drugsTypeName :value=drugsTypeOption.drugsTypeId />
+          </div>
         </el-select>
       </el-form-item>
       <el-form-item label="药物规格" :label-width="formLabelWidth">
@@ -130,8 +130,9 @@
       </el-form-item>
       <el-form-item label="药物单位" :label-width="formLabelWidth">
         <el-select v-model="drugsForm.drugsUnitid" placeholder="选择药物单位">
-          <el-option label="Zone No.1" value="shanghai" />
-          <el-option label="Zone No.2" value="beijing" />
+          <div v-for="drugsUnitOption in drugsUnit">
+            <el-option :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
+          </div>
         </el-select>
       </el-form-item>
       <el-form-item label="药物产地" :label-width="formLabelWidth">
@@ -144,13 +145,13 @@
         <el-input v-model="drugsForm.drugsRetailPrice" autocomplete="off" />
       </el-form-item>
       <el-form-item label="创建时间" :label-width="formLabelWidth">
-        <el-input v-model="drugsForm.drugsCreatTime" autocomplete="off" />
+        <el-input v-model="drugsForm.drugsCreatTime" disabled />
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="EDIT_DIALOG = false">取消</el-button>
-        <el-button type="primary" @click="EDIT">修改</el-button>
+        <el-button type="primary" @click="EDIT('drugs','null')">修改</el-button>
       </span>
     </template>
   </el-dialog>
@@ -165,9 +166,12 @@ import { reactive, ref } from 'vue'
 import { Menu as IconMenu, Message, Setting, Delete, Edit } from '@element-plus/icons-vue'
 import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
 import { CURRENCY_DELETE, CURRENCY_EDIT } from "@/apis/FormRudApis"
+import { QUERY_DRUGS_TYPE, QUERY_DRUGSUNIT } from "@/apis/Types_Request"
 
 
 let drugsList: any = reactive([])
+let drugsType: any = reactive([])
+let drugsUnit: any = reactive([])
 let pageSize = ref(1); // 给初始值
 let totals = ref(1); // 给初始值
 let nowPage = ref(1);
@@ -177,46 +181,49 @@ let drugsForm = reactive({
   drugsId: 0,
   drugsName: "",
   drugsTypeId: 0,
-  drugsType: [""],
   drugsSpecifications: "",
   drugsUnitid: 0,
-  drugsUnit: [""],
   drugsPlace: "",
   drugsOriginPrice: 0,
   drugsRetailPrice: 0,
   drugsCreatTime: "",
 })
 
+QUERY_DRUGSUNIT().then(res =>{ // 赋值unit
+  drugsUnit.length = 0
+  drugsUnit.push(...res.data);
+})
+
+QUERY_DRUGS_TYPE().then(res =>{ // 赋值type
+  drugsType.length = 0
+  drugsType.push(...res.data);
+})
+
+
 async function DELETE(Title: String, url: String, id: number) {
   await CURRENCY_DELETE(Title, url, id)
   handleSizeChange(nowPage.value)
 }
 
-async function EDIT(Title: String, url: String, data: any) {
-  console.log(data.drugsId)
+async function EDIT(url: String, data: any) {
+  if(data!='null'){
+    drugsForm.drugsId = data.drugsId
+    drugsForm.drugsName = data.drugsName
+    drugsForm.drugsTypeId = data.drugsTypeId
+    drugsForm.drugsSpecifications = data.drugsSpecifications
+    drugsForm.drugsUnitid = data.drugsUnitid
+    drugsForm.drugsPlace = data.drugsPlace
+    drugsForm.drugsOriginPrice = data.drugsOriginPrice
+    drugsForm.drugsRetailPrice = data.drugsRetailPrice
+    drugsForm.drugsCreatTime = data.drugsCreatTime
+  }
   
-  drugsForm.drugsId = data.drugsId
-  drugsForm.drugsName = data.drugsName
-  drugsForm.drugsTypeId = data.drugsTypeId
-  drugsForm.drugsType = data.drugsType
-  drugsForm.drugsSpecifications = data.drugsSpecifications
-  drugsForm.drugsUnitid = data.drugsUnitid
-  drugsForm.drugsUnit = data.drugsUnit
-  drugsForm.drugsPlace = data.drugsPlace
-  drugsForm.drugsOriginPrice = data.drugsOriginPrice
-  drugsForm.drugsRetailPrice = data.drugsRetailPrice
-  drugsForm.drugsCreatTime = data.drugsCreatTime
+  EDIT_DIALOG.value = !EDIT_DIALOG.value;
 
-  
-  // console.log("....=",drugsForm)
-
-  // drugsForm.values = data;
-  // console.log("this is data = drugsForm",drugsForm)
-  
-  EDIT_DIALOG.value = !EDIT_DIALOG.value; // dialog开关
-
-  // await CURRENCY_EDIT(Title, url, drugsForm)
-  // handleSizeChange(nowPage.value)
+  if(!EDIT_DIALOG.value || data == 'null'){
+    await CURRENCY_EDIT(url, drugsForm)
+    await handleSizeChange(nowPage.value)
+  }
 }
 
 function handleSizeChange(val: number) {
