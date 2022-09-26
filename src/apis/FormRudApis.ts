@@ -39,10 +39,7 @@ export async function CURRENCY_REQUEST(url: String, data: any, operation: Operat
             }
         })
     }).catch(() => {
-        ElMessage({
-            type: 'info',
-            message: '取消操作',
-        })
+        ElMessage({type: 'info',message: '取消操作',})
     })
 }
 

@@ -106,7 +106,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-pagination background :page-size="pageSize" layout="prev, pager, next" :total="totals"
+       <el-pagination background :page-size="pageSize" layout="prev, pager, next" :total="totals"
             :current-page="nowPage"
             hide-on-single-page 
             @current-change="handleSizeChange" />
@@ -114,10 +114,7 @@
       </el-main>
     </el-container>
   </el-container>
-
-
-
-
+  
   <el-dialog v-model="EDIT_DIALOG" title="药物修改" width="30%" align-center>
     <el-form :model="drugsEditForm">
       <el-form-item label="药名" :label-width="formLabelWidth">
@@ -288,7 +285,7 @@ async function ADD(url: String, data: any, operationId: Number) {
     nowPage.value = Math.ceil(totals.value/pageSize.value)
     drugsAddForm = CLEAR_FORM(drugsAddForm)
   }
-  handleSizeChange(Math.ceil(totals.value/pageSize.value))
+  handleSizeChange(nowPage.value)
 }
 
 async function EDIT(url: String, data: any, operationId: Number) {
