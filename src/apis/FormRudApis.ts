@@ -1,21 +1,41 @@
 import { ElMessageBox, ElMessage } from "element-plus"
 import axios from "axios"
+import { TRAP_FOCUS_HANDLER } from "element-plus/es/directives/trap-focus"
 
-export async function CURRENCY_DELETE(Title: String, url: String, id: number) {
+class Operation {
+    opreationUrl = ""
+    operationName = ""
+    dataShowName = ""
+}
+
+/**
+ * 
+ * @param url 
+ * @param operation 
+ * @param data 
+ * @param 注意：1为新增、2为修改、3为删除。其他的传入值直接报错！ 
+ * @returns 
+ */
+export async function CURRENCY_REQUEST(url: String, data: any, operation: Operation) {
+    if (operation.opreationUrl == "" || operation.operationName == "") {
+        ElMessage({ type: 'error', message: '信息操作失败，请检查传入参数!' })
+        return
+    }
+
     await ElMessageBox.confirm(
-        '确认要删除 >>' + Title + '<<吗?',
-        '删除确认',
+        '确认' + operation.operationName + '>>' + operation.dataShowName + '吗?',
+        operation.operationName + '确认',
         {
-            confirmButtonText: '删除',
+            confirmButtonText: operation.operationName,
             cancelButtonText: '取消',
-            type: 'error',
+            type: 'warning',
         }
     ).then(() => {
-        axios.post(url + "/remove/" + id).then((res: any) => {
+        axios.post(url + "/" + operation.opreationUrl + "/", data).then((res: any) => {
             if (res.data == true) {
-                ElMessage({ type: 'success', message: '删除成功' })
+                ElMessage({ type: 'success', message: '数据>>' + operation.dataShowName + '<<' + operation.operationName + '成功!' })
             } else {
-                ElMessage({ type: 'error', message: '因为服务器原因删除失败!' })
+                ElMessage({ type: 'error', message: '因为服务器原因，数据>>' + operation.dataShowName + '<<' + operation.operationName + '失败!' })
             }
         })
     }).catch(() => {
@@ -26,27 +46,63 @@ export async function CURRENCY_DELETE(Title: String, url: String, id: number) {
     })
 }
 
-export async function CURRENCY_EDIT(url: String, data: any) {
-    await ElMessageBox.confirm(
-        '确认修改吗?',
-        '修改确认',
-        {
-            confirmButtonText: '修改',
-            cancelButtonText: '取消',
-            type: 'warning',
+export function CURRENCY_OPERATION_API(operation: Number, dataShowName: string) {
+    let cacheOperation = new Operation()
+    switch (operation) {
+        case 1:
+            cacheOperation.opreationUrl = "insert"
+            cacheOperation.operationName = "新增"
+            cacheOperation.dataShowName = dataShowName
+            break;
+        case 2:
+            cacheOperation.opreationUrl = "update"
+            cacheOperation.operationName = "修改"
+            cacheOperation.dataShowName = dataShowName
+            break;
+        case 3:
+            cacheOperation.opreationUrl = "remove"
+            cacheOperation.operationName = "删除"
+            cacheOperation.dataShowName = dataShowName
+            break;
+        default:
+            cacheOperation.opreationUrl = ""
+            cacheOperation.operationName = ""
+            cacheOperation.dataShowName = ""
+            break;
+    }
+    return cacheOperation
+}
+
+export function FORM_STATS_JUDGE(data: any) {
+    for (let key in data) {
+        if (data[key] == "" || data[key] == undefined || data[key] == null) {
+            ElMessage({ type: 'error', message: '表单的数据不能为空！' })
+            console.log(key)
+            return false;
         }
-    ).then(() => {
-        axios.post(url + "/update/", data).then((res: any) => {
-            if (res.data == true) {
-                ElMessage({ type: 'success', message: '修改成功' })
-            } else {
-                ElMessage({ type: 'error', message: '因为服务器原因修改失败!' })
-            }
-        })
-    }).catch(() => {
-        ElMessage({
-            type: 'info',
-            message: '取消操作',
-        })
-    })
+    }
+    return true
+}
+
+export function CLEAR_FORM(data: any) {
+    for (let key in data) {
+        switch(typeof(data[key])){
+            case "number":
+                data[key] = 0
+            case "string":
+                data[key] = ""
+        }
+    }
+    return data
+}
+
+export function GET_NOW_DATE_FORMATE() {
+    let date = new Date()
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate();
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let seconds = date.getSeconds();
+    return year + "年" + month + "月" + day + "日" + hours + "时" + minutes + "分" + (seconds < 10 ? "0" + seconds : seconds) + "秒"
 }
