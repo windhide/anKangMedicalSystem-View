@@ -40,13 +40,13 @@ export function getNavigation(path: String) {
     const navigation = new Navigation("/" + path);
     let cacheChildrenList: any = []
     routes.filter(_ => { return _.path == navigation.path }).forEach((data: any) => {
-        
+
         data.children.forEach((children: any) => {
             let inCacheChildrenList: any = []
-            let cache = new ChildrenNavigation(children.path, children.name, children.props.icon)
+            let cache = new ChildrenNavigation("/"+children.path, children.name, children.props.icon)
             if (hasChildren(children)) {
                 children.children.forEach((inChildren: any) => {
-                    const inCache = new ChildrenNavigation(inChildren.path, inChildren.name, inChildren.props.icon)
+                    const inCache = new ChildrenNavigation("/"+inChildren.path, inChildren.name, inChildren.props.icon)
                     inCacheChildrenList.push(inCache)
                 });
             }
