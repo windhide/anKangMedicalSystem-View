@@ -6,13 +6,18 @@
           <el-sub-menu :index="String(index)">
             <template #title>
               <el-icon>
-                <FirstAidKit />
+                <component :is="navigation.icon" />
               </el-icon>{{navigation.childrenName}}
             </template>
             <div v-for="(children,childrenIndex) in navigation.children">
-            <router-link :to="NAVIGATION.path+navigation.childrenPath+children.childrenPath">
-                <el-menu-item :index="index+'-'+childrenIndex">{{children.childrenName}}</el-menu-item>
-            </router-link>
+              <router-link :to="NAVIGATION.path+navigation.childrenPath+children.childrenPath">
+                <el-menu-item :index="index+'-'+childrenIndex">
+                  <el-icon>
+                    <component :is="children.icon" />
+                  </el-icon>
+                  {{children.childrenName}}
+                </el-menu-item>
+              </router-link>
             </div>
           </el-sub-menu>
 
