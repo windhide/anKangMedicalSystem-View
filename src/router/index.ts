@@ -3,6 +3,7 @@ import rootViews from '@/views/rootViews.vue'
 import staffViews from '@/views/staffViews.vue'
 import userViews from '@/views/userViews.vue'
 import drugs from '@/components/root/drugs.vue'
+import drugsType from '@/components/root/drugsType.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -33,7 +34,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'type',
             name: '药品类型信息',
-            component: rootViews,
+            component: drugsType,
             props:{
               icon: 'Collection',
             },

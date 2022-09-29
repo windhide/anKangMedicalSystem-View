@@ -114,7 +114,7 @@
 
 <script lang="ts" setup>
     import { reactive, ref } from 'vue'
-    import { Menu as IconMenu, Message, Setting, Delete, Edit, StarFilled } from '@element-plus/icons-vue'
+    import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
     import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
     import { CURRENCY_REQUEST, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudApis"
     import { QUERY_DRUGS_TYPE, QUERY_DRUGSUNIT } from "@/apis/Types_Request"

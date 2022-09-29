@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Menu as IconMenu, Message, Setting, FirstAidKit } from '@element-plus/icons-vue'
+import { Setting } from '@element-plus/icons-vue'
 import { getNavigation } from '@/apis/NavigationApis'
 
 const NAVIGATION = getNavigation("root")
