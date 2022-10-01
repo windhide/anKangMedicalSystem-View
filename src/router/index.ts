@@ -19,7 +19,6 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'drugs',
         name: '药物管理',
-        component: drugs,
         props:{
           icon: 'FirstAidKit',
         },
@@ -51,7 +50,6 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'staff',
         name: '员工管理',
-        component: rootViews,
         props:{
           icon: 'MagicStick',
         },
@@ -97,7 +95,6 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'wareHouse',
         name: '仓库管理',
-        component: rootViews,
         props:{
           icon: 'MagicStick',
         },
@@ -129,7 +126,6 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'user',
         name: '用户管理',
-        component: rootViews,
         props:{
           icon: 'MagicStick',
         },
