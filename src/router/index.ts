@@ -4,6 +4,7 @@ import staffViews from '@/views/staffViews.vue'
 import userViews from '@/views/userViews.vue'
 import drugs from '@/components/root/drugs.vue'
 import drugsType from '@/components/root/drugsType.vue'
+import drugsUnit from '@/components/root/drugsUnit.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -40,7 +41,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'unit',
             name: '药品规格单位信息',
-            component: rootViews,
+            component: drugsUnit,
             props:{
               icon: 'MagicStick',
             },
