@@ -50,9 +50,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
-import { CURRENCY_REQUEST, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudApis"
-import { QUERY_DRUGS_UNIT } from "@/apis/Types_Request"
-
+import { CURRENCY_REQUEST, CURRENCY_SELECT, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudAndSelectApis"
 
 let drugsUnit: any = reactive([])
 
@@ -74,7 +72,7 @@ let drugsUnitAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        QUERY_DRUGS_UNIT().then(res => {
+        CURRENCY_SELECT("drugsUnit").then(res => {
             drugsUnit.length = 0
             drugsUnit.push(...res.data)
         })
@@ -131,7 +129,7 @@ async function EDIT(url: String, data: any, operationId: Number) {
     }
 }
 
-QUERY_DRUGS_UNIT().then(res => {
+CURRENCY_SELECT("drugsUnit").then(res => {
     drugsUnit.length = 0
     drugsUnit.push(...res.data)
 })

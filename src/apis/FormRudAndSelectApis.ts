@@ -8,6 +8,12 @@ class Operation {
     dataShowName = ""
 }
 
+export function CURRENCY_SELECT(url:String){
+    return axios.post(url+"/select/list").then((res:any) =>{
+        return res;
+    })
+}
+
 /**
  * 
  * @param url 

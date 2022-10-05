@@ -57,9 +57,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
-import { CURRENCY_REQUEST, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudApis"
-import { QUERY_DRUGS_TYPE } from "@/apis/Types_Request"
-
+import { CURRENCY_REQUEST, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM, CURRENCY_SELECT } from "@/apis/FormRudAndSelectApis"
 
 let drugsType: any = reactive([])
 
@@ -83,7 +81,7 @@ let drugsTypeAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        QUERY_DRUGS_TYPE().then(res => {
+        CURRENCY_SELECT("drugsType").then(res => {
             drugsType.length = 0
             drugsType.push(...res.data)
         })
@@ -142,7 +140,7 @@ async function EDIT(url: String, data: any, operationId: Number) {
     }
 }
 
-QUERY_DRUGS_TYPE().then(res => {
+CURRENCY_SELECT("drugsType").then(res => {
     drugsType.length = 0
     drugsType.push(...res.data)
 })
