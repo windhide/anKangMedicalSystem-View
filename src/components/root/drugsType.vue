@@ -20,7 +20,7 @@
 
     <el-dialog v-model="EDIT_DIALOG" title="药品类型修改" width="30%" align-center>
         <el-form :model="drugsTypeEditForm">
-            <el-form-item label="药名" :label-width="formLabelWidth">
+            <el-form-item label="药品类型" :label-width="formLabelWidth">
                 <el-input v-model="drugsTypeEditForm.drugsTypeName" autocomplete="off" />
             </el-form-item>
             <el-form-item label="创建时间" :label-width="formLabelWidth">
