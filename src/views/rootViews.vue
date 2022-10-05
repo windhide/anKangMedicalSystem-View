@@ -57,7 +57,6 @@ import { getNavigation } from '@/apis/NavigationApis'
 
 const NAVIGATION = getNavigation("root")
 
-console.log(NAVIGATION)
 </script>
 
 <style scoped>

@@ -16,8 +16,8 @@
                     <el-button type="success" :icon="StarFilled" @click="ADD_DIALOG = true">添加</el-button>
                 </template>
                 <template #default="scope">
-                    <el-button type="primary" :icon="Edit" circle @click="CURRENCY_CRUD('drugs',scope.row,2)" />
-                    <el-button type="danger" :icon="Delete" circle @click="CURRENCY_CRUD('drugs',scope.row,3)" />
+                    <el-button type="primary" :icon="Edit" circle @click="CURRENCY_CRUD(URL,scope.row,2)" />
+                    <el-button type="danger" :icon="Delete" circle @click="CURRENCY_CRUD(URL,scope.row,3)" />
                 </template>
             </el-table-column>
         </el-table>
@@ -63,7 +63,7 @@
         <template #footer>
             <span class="dialog-footer">
                 <el-button @click="EDIT_DIALOG = false">取消</el-button>
-                <el-button type="primary" @click="CURRENCY_CRUD('drugs','null',2)">修改</el-button>
+                <el-button type="primary" @click="CURRENCY_CRUD(URL,'null',2)">修改</el-button>
             </span>
         </template>
     </el-dialog>
@@ -106,7 +106,7 @@
         <template #footer>
             <span class="dialog-footer">
                 <el-button @click="ADD_DIALOG = false">取消</el-button>
-                <el-button type="primary" @click="CURRENCY_CRUD('drugs','null',1)">添加</el-button>
+                <el-button type="primary" @click="CURRENCY_CRUD(URL,'null',1)">添加</el-button>
             </span>
         </template>
     </el-dialog>
@@ -130,6 +130,9 @@
     const EDIT_DIALOG = ref(false) // 修改dialog窗口开关
     const ADD_DIALOG = ref(false) // 添加dialog窗口开关
     const formLabelWidth = '100px' // dialog中组件的宽度
+    const URL = "drugs" // 本组件内通用的url
+
+
     let drugsEditForm = reactive({
       drugsId: 0,
       drugsName: "",
