@@ -2,9 +2,9 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import rootViews from '@/views/rootViews.vue'
 import staffViews from '@/views/staffViews.vue'
 import userViews from '@/views/userViews.vue'
-import drugs from '@/components/root/drugs.vue'
-import drugsType from '@/components/root/drugsType.vue'
-import drugsUnit from '@/components/root/drugsUnit.vue'
+import drugs from '@/components/root/drugs/drugs.vue'
+import drugsType from '@/components/root/drugs/drugsType.vue'
+import drugsUnit from '@/components/root/drugs/drugsUnit.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
