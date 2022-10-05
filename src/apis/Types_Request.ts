@@ -10,7 +10,7 @@ export function QUERY_DRUGS_TYPE(){
 }
 
 // drugsUnit - apis
-export function QUERY_DRUGSUNIT(){
+export function QUERY_DRUGS_UNIT(){
     return axios.post("drugsUnit/select/list").then((res:any) =>{
         return res;
     })

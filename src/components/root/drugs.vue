@@ -117,7 +117,7 @@
     import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
     import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
     import { CURRENCY_REQUEST, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudApis"
-    import { QUERY_DRUGS_TYPE, QUERY_DRUGSUNIT } from "@/apis/Types_Request"
+    import { QUERY_DRUGS_TYPE, QUERY_DRUGS_UNIT } from "@/apis/Types_Request"
     
     
     let drugsList: any = reactive([])
@@ -156,7 +156,7 @@
       drugsCreatTime: "",
     })
     
-    QUERY_DRUGSUNIT().then(res => { // 赋值unit
+    QUERY_DRUGS_UNIT().then(res => { // 赋值unit
       drugsUnit.length = 0
       drugsUnit.push(...res.data);
     })
