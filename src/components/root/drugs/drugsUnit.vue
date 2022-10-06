@@ -72,7 +72,7 @@ let drugsUnitAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT("drugsUnit").then(res => {
+        CURRENCY_SELECT(URL).then(res => {
             drugsUnit.length = 0
             drugsUnit.push(...res.data)
         })

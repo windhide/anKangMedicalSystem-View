@@ -97,7 +97,7 @@ let pharmacyAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT("pharmacy").then(res => {
+        CURRENCY_SELECT(URL).then(res => {
             pharmacyList.length = 0
             pharmacyList.push(...res.data)
         })

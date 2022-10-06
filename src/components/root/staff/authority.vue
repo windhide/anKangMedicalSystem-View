@@ -81,7 +81,7 @@ let authorityAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT("authority").then(res => {
+        CURRENCY_SELECT(URL).then(res => {
             authorityList.length = 0
             authorityList.push(...res.data)
         })

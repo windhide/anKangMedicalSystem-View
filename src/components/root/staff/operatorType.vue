@@ -81,7 +81,7 @@ let operatorTypeAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT("operatorType").then(res => {
+        CURRENCY_SELECT(URL).then(res => {
             operatorTypeList.length = 0
             operatorTypeList.push(...res.data)
         })

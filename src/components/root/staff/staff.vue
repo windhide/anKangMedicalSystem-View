@@ -159,7 +159,7 @@ let staffAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT("staff").then(res => {
+        CURRENCY_SELECT(URL).then(res => {
             staffList.length = 0
             staffList.push(...res.data)
         })
