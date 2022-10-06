@@ -16,12 +16,12 @@
         </el-table>
     </el-scrollbar>
 
-    <el-dialog v-model="EDIT_DIALOG" title="员工信息修改" width="30%" align-center>
+    <el-dialog v-model="EDIT_DIALOG" title="权限信息修改" width="30%" align-center>
         <el-form :model="authorityEditForm">
-            <el-form-item label="药房Id" :label-width="formLabelWidth">
+            <el-form-item label="权限Id" :label-width="formLabelWidth">
                 <el-input v-model="authorityEditForm.authorityId" disabled />
             </el-form-item>
-            <el-form-item label="药房名字" :label-width="formLabelWidth">
+            <el-form-item label="权限名字" :label-width="formLabelWidth">
                 <el-input v-model="authorityEditForm.authorityName" autocomplete="off" />
             </el-form-item>
         </el-form>
@@ -33,9 +33,9 @@
         </template>
     </el-dialog>
 
-    <el-dialog v-model="ADD_DIALOG" title="药物添加" width="30%" align-center>
+    <el-dialog v-model="ADD_DIALOG" title="权限添加" width="30%" align-center>
         <el-form :model="authorityAddForm">
-            <el-form-item label="药房名字" :label-width="formLabelWidth">
+            <el-form-item label="权限名字" :label-width="formLabelWidth">
                 <el-input v-model="authorityAddForm.authorityName" autocomplete="off" />
             </el-form-item>
         </el-form>

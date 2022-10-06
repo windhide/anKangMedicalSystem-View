@@ -64,7 +64,7 @@
         </template>
     </el-dialog>
 
-    <el-dialog v-model="ADD_DIALOG" title="药物添加" width="30%" align-center>
+    <el-dialog v-model="ADD_DIALOG" title="员工信息添加" width="30%" align-center>
         <el-form :model="staffAddForm">
             <el-form-item label="员工名字" :label-width="formLabelWidth">
                 <el-input v-model="staffAddForm.staffName" autocomplete="off" />

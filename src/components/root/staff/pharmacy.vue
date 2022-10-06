@@ -38,7 +38,7 @@
         </template>
     </el-dialog>
 
-    <el-dialog v-model="ADD_DIALOG" title="药房添加" width="30%" align-center>
+    <el-dialog v-model="ADD_DIALOG" title="药房信息添加" width="30%" align-center>
         <el-form :model="pharmacyAddForm">
             <el-form-item label="药房名字" :label-width="formLabelWidth">
                 <el-input v-model="pharmacyAddForm.pharmacyName" autocomplete="off" />
