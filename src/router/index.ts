@@ -10,6 +10,7 @@ import pharmacy from '@/components/root/staff/pharmacy.vue'
 import authority from '@/components/root/staff/authority.vue'
 import operatorType from '@/components/root/staff/operatorType.vue'
 import operator from '@/components/root/staff/operator.vue'
+import warehouseType from '@/components/root/warehouse/warehouseType.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -115,7 +116,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'type',
             name: '仓库类型信息',
-            component: rootViews,
+            component: warehouseType,
             props: {
               icon: 'MagicStick',
             },
