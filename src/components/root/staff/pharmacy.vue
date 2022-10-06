@@ -1,10 +1,10 @@
 <template>
     <el-scrollbar>
         <el-table :data="pharmacyList" max-height="700">
-            <el-table-column prop="pharmacyId" label="员工Id" width="100" />
-            <el-table-column prop="pharmacyName" label="员工名" width="100" />
-            <el-table-column prop="pharmacyPhone" label="电话号码" width="300" />
-            <el-table-column prop="pharmacyAddress" label="所属药房" width="300" />
+            <el-table-column prop="pharmacyId" label="药房Id" width="100" />
+            <el-table-column prop="pharmacyName" label="药房名字" width="100" />
+            <el-table-column prop="pharmacyPhone" label="药房联系电话" width="300" />
+            <el-table-column prop="pharmacyAddress" label="药房地址" width="300" />
             <el-table-column fixed="right" label="操作">
                 <template #header>
                     操作
@@ -18,7 +18,7 @@
         </el-table>
     </el-scrollbar>
 
-    <el-dialog v-model="EDIT_DIALOG" title="员工信息修改" width="30%" align-center>
+    <el-dialog v-model="EDIT_DIALOG" title="药房信息修改" width="30%" align-center>
         <el-form :model="pharmacyEditForm">
             <el-form-item label="药房名字" :label-width="formLabelWidth">
                 <el-input v-model="pharmacyEditForm.pharmacyName" autocomplete="off" />
@@ -38,7 +38,7 @@
         </template>
     </el-dialog>
 
-    <el-dialog v-model="ADD_DIALOG" title="药物添加" width="30%" align-center>
+    <el-dialog v-model="ADD_DIALOG" title="药房添加" width="30%" align-center>
         <el-form :model="pharmacyAddForm">
             <el-form-item label="药房名字" :label-width="formLabelWidth">
                 <el-input v-model="pharmacyAddForm.pharmacyName" autocomplete="off" />
