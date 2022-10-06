@@ -8,6 +8,7 @@ import drugsUnit from '@/components/root/drugs/drugsUnit.vue'
 import staff from '@/components/root/staff/staff.vue'
 import pharmacy from '@/components/root/staff/pharmacy.vue'
 import authority from '@/components/root/staff/authority.vue'
+import operatorType from '@/components/root/staff/operatorType.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -23,7 +24,7 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'drugs',
         name: '药物管理',
-        props:{
+        props: {
           icon: 'FirstAidKit',
         },
         children: [
@@ -31,21 +32,21 @@ export const routes: Array<RouteRecordRaw> = [
             path: 'main',
             name: '药品信息',
             component: drugs,
-            props:{
+            props: {
               icon: 'SuitcaseLine',
             },
           }, {
             path: 'type',
             name: '药品类型信息',
             component: drugsType,
-            props:{
+            props: {
               icon: 'Collection',
             },
           }, {
             path: 'unit',
             name: '药品规格单位信息',
             component: drugsUnit,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }
@@ -54,7 +55,7 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'staff',
         name: '员工管理',
-        props:{
+        props: {
           icon: 'MagicStick',
         },
         children: [
@@ -62,35 +63,35 @@ export const routes: Array<RouteRecordRaw> = [
             path: 'main',
             name: '员工信息',
             component: staff,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'pharmacy',
             name: '药房信息',
             component: pharmacy,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'authority',
             name: '权限信息',
             component: authority,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'operator',
             name: '药房操作记录',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'operatorType',
             name: '药房操作类型',
-            component: rootViews,
-            props:{
+            component: operatorType,
+            props: {
               icon: 'MagicStick',
             },
           }
@@ -99,7 +100,7 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'wareHouse',
         name: '仓库管理',
-        props:{
+        props: {
           icon: 'MagicStick',
         },
         children: [
@@ -107,21 +108,21 @@ export const routes: Array<RouteRecordRaw> = [
             path: 'main',
             name: '仓库信息',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'type',
             name: '仓库类型信息',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'record',
             name: '仓库操作记录',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }
@@ -130,7 +131,7 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: 'user',
         name: '用户管理',
-        props:{
+        props: {
           icon: 'MagicStick',
         },
         children: [
@@ -138,21 +139,21 @@ export const routes: Array<RouteRecordRaw> = [
             path: 'main',
             name: '用户信息',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'levelType',
             name: '用户VIP等级管理',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }, {
             path: 'record',
             name: '用户购买记录',
             component: rootViews,
-            props:{
+            props: {
               icon: 'MagicStick',
             },
           }
