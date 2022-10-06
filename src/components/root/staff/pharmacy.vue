@@ -62,7 +62,6 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
-import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
 import { CURRENCY_REQUEST, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM, CURRENCY_SELECT } from "@/apis/FormRudAndSelectApis"
 
 let pharmacyList: any = reactive([])
