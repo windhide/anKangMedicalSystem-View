@@ -99,6 +99,15 @@ export function CLEAR_FORM(data: any) {
     return data
 }
 
+export function TOSTRING(data: any){
+    let cacheString = "{"
+    for (let key in data) {
+        cacheString+= key +" : "+data[key]+",\t"
+    }
+    cacheString+="}"
+    return cacheString
+}
+
 export function GET_NOW_DATE_FORMATE() {
     let date = new Date()
     let year = date.getFullYear()
