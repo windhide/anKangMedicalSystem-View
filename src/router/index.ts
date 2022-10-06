@@ -7,6 +7,7 @@ import drugsType from '@/components/root/drugs/drugsType.vue'
 import drugsUnit from '@/components/root/drugs/drugsUnit.vue'
 import staff from '@/components/root/staff/staff.vue'
 import pharmacy from '@/components/root/staff/pharmacy.vue'
+import authority from '@/components/root/staff/authority.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -74,7 +75,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'authority',
             name: '权限信息',
-            component: rootViews,
+            component: authority,
             props:{
               icon: 'MagicStick',
             },
