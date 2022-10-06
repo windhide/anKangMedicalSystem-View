@@ -5,6 +5,7 @@ import userViews from '@/views/userViews.vue'
 import drugs from '@/components/root/drugs/drugs.vue'
 import drugsType from '@/components/root/drugs/drugsType.vue'
 import drugsUnit from '@/components/root/drugs/drugsUnit.vue'
+import staff from '@/components/root/staff/staff.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -58,7 +59,7 @@ export const routes: Array<RouteRecordRaw> = [
           {
             path: 'main',
             name: '员工信息',
-            component: rootViews,
+            component: staff,
             props:{
               icon: 'MagicStick',
             },

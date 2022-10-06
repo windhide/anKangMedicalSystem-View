@@ -113,96 +113,96 @@
 </template>
 
 <script lang="ts" setup>
-    import { reactive, ref } from 'vue'
-    import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
-    import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
-    import { CURRENCY_REQUEST, CURRENCY_SELECT, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudAndSelectApis"
-    
-    
-    let drugsList: any = reactive([])
-    let drugsType: any = reactive([])
-    let drugsUnit: any = reactive([])
-    let pageSize = ref(1); // 给初始值
-    let totals = ref(1); // 给初始值
-    let nowPage = ref(1);
-    let cacheData = "";
-    const EDIT_DIALOG = ref(false) // 修改dialog窗口开关
-    const ADD_DIALOG = ref(false) // 添加dialog窗口开关
-    const formLabelWidth = '100px' // dialog中组件的宽度
-    const URL = "drugs" // 本组件内通用的url
+import { reactive, ref } from 'vue'
+import { Delete, Edit, StarFilled } from '@element-plus/icons-vue'
+import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
+import { CURRENCY_REQUEST, CURRENCY_SELECT, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM } from "@/apis/FormRudAndSelectApis"
 
 
-    let drugsEditForm = reactive({
-      drugsId: 0,
-      drugsName: "",
-      drugsTypeId: 0,
-      drugsSpecifications: "",
-      drugsUnitid: 0,
-      drugsPlace: "",
-      drugsOriginPrice: 0,
-      drugsRetailPrice: 0,
-      drugsCreatTime: "",
-    })
-    let drugsAddForm = reactive({
-      drugsId: 0,
-      drugsName: "",
-      drugsTypeId: "",
-      drugsSpecifications: "",
-      drugsUnitid: "",
-      drugsPlace: "",
-      drugsOriginPrice: 0,
-      drugsRetailPrice: 0,
-      drugsCreatTime: "",
-    })
-    
-    CURRENCY_SELECT("drugsUnit").then(res => { // 赋值unit
-      drugsUnit.length = 0
-      drugsUnit.push(...res.data);
-    })
-    
-    CURRENCY_SELECT("drugsType").then(res => { // 赋值type
-      drugsType.length = 0
-      drugsType.push(...res.data);
-    })
-    
-    async function CURRENCY_CRUD(url: String, data: any, operationId: Number) {
-      switch (operationId) {
+let drugsList: any = reactive([])
+let drugsType: any = reactive([])
+let drugsUnit: any = reactive([])
+let pageSize = ref(1); // 给初始值
+let totals = ref(1); // 给初始值
+let nowPage = ref(1);
+let cacheData = "";
+const EDIT_DIALOG = ref(false) // 修改dialog窗口开关
+const ADD_DIALOG = ref(false) // 添加dialog窗口开关
+const formLabelWidth = '100px' // dialog中组件的宽度
+const URL = "drugs" // 本组件内通用的url
+
+
+let drugsEditForm = reactive({
+    drugsId: 0,
+    drugsName: "",
+    drugsTypeId: 0,
+    drugsSpecifications: "",
+    drugsUnitid: 0,
+    drugsPlace: "",
+    drugsOriginPrice: 0,
+    drugsRetailPrice: 0,
+    drugsCreatTime: "",
+})
+let drugsAddForm = reactive({
+    drugsId: 0,
+    drugsName: "",
+    drugsTypeId: "",
+    drugsSpecifications: "",
+    drugsUnitid: "",
+    drugsPlace: "",
+    drugsOriginPrice: 0,
+    drugsRetailPrice: 0,
+    drugsCreatTime: "",
+})
+
+CURRENCY_SELECT("drugsUnit").then(res => { // 赋值unit
+    drugsUnit.length = 0
+    drugsUnit.push(...res.data);
+})
+
+CURRENCY_SELECT("drugsType").then(res => { // 赋值type
+    drugsType.length = 0
+    drugsType.push(...res.data);
+})
+
+async function CURRENCY_CRUD(url: String, data: any, operationId: Number) {
+    switch (operationId) {
         case 1: // 1是新增
-          await ADD(url, data, operationId)
-          break;
+            await ADD(url, data, operationId)
+            break;
         case 2: // 2是修改
-          await EDIT(url, data, operationId)
-          break;
+            await EDIT(url, data, operationId)
+            break;
         case 3: // 3是删除
-          await DELETE(url, data, operationId)
-          break;
+            await DELETE(url, data, operationId)
+            break;
         default:
-          console.error("错误的操作！");
-          return
-      }
+            console.error("错误的操作！");
+            return
     }
-    
-    async function DELETE(url: String, data: any, operationId: Number) {
-      await CURRENCY_REQUEST(url, { drugsId: data.drugsId }, CURRENCY_OPERATION_API(operationId, data.drugsName))
-      handleSizeChange(nowPage.value)
-    }
-    
-    async function ADD(url: String, data: any, operationId: Number) {
-      ADD_DIALOG.value = !ADD_DIALOG.value;
-      drugsAddForm.drugsId = NaN;
-      drugsAddForm.drugsCreatTime = GET_NOW_DATE_FORMATE();
-      
-      if(!ADD_DIALOG.value && data == 'null' && FORM_STATS_JUDGE(drugsAddForm)){
-        await CURRENCY_REQUEST(url, drugsAddForm, CURRENCY_OPERATION_API(operationId,"->"+drugsAddForm.drugsName))
-        nowPage.value = Math.ceil(totals.value/pageSize.value)
+}
+
+async function DELETE(url: String, data: any, operationId: Number) {
+    await CURRENCY_REQUEST(url, { drugsId: data.drugsId }, CURRENCY_OPERATION_API(operationId, data.drugsName))
+    handleSizeChange(nowPage.value)
+}
+
+async function ADD(url: String, data: any, operationId: Number) {
+    ADD_DIALOG.value = !ADD_DIALOG.value;
+    drugsAddForm.drugsId = NaN;
+    drugsAddForm.drugsCreatTime = GET_NOW_DATE_FORMATE();
+
+    if (!ADD_DIALOG.value && data == 'null' && FORM_STATS_JUDGE(drugsAddForm)) {
+        await CURRENCY_REQUEST(url, drugsAddForm, CURRENCY_OPERATION_API(operationId, "->" + drugsAddForm.drugsName))
+        nowPage.value = Math.ceil(totals.value / pageSize.value)
         drugsAddForm = CLEAR_FORM(drugsAddForm)
-      }
-      handleSizeChange(nowPage.value)
     }
-    
-    async function EDIT(url: String, data: any, operationId: Number) {
-    
-      if (!EDIT_DIALOG.value && data != 'null') {
+    handleSizeChange(nowPage.value)
+}
+
+async function EDIT(url: String, data: any, operationId: Number) {
+
+    if (!EDIT_DIALOG.value && data != 'null') {
         drugsEditForm.drugsId = data.drugsId
         drugsEditForm.drugsName = data.drugsName
         drugsEditForm.drugsTypeId = data.drugsTypeId
@@ -212,29 +212,29 @@
         drugsEditForm.drugsOriginPrice = data.drugsOriginPrice
         drugsEditForm.drugsRetailPrice = data.drugsRetailPrice
         drugsEditForm.drugsCreatTime = data.drugsCreatTime
-    
+
         cacheData = data.drugsName
-      }
-    
-      EDIT_DIALOG.value = !EDIT_DIALOG.value;
-    
-      if (!EDIT_DIALOG.value && data == 'null') {
+    }
+
+    EDIT_DIALOG.value = !EDIT_DIALOG.value;
+
+    if (!EDIT_DIALOG.value && data == 'null') {
         await CURRENCY_REQUEST(url, drugsEditForm, CURRENCY_OPERATION_API(operationId, "前->" + cacheData + ",后->" + drugsEditForm.drugsName))
         handleSizeChange(nowPage.value)
         drugsEditForm = CLEAR_FORM(drugsEditForm)
-      }
     }
-    
-    function handleSizeChange(val: number) {
-      setTimeout(() => {
+}
+
+function handleSizeChange(val: number) {
+    setTimeout(() => {
         QUERY_DRUGS_FOR_LIST(val).then(res => {
-          drugsList.length = 0
-          nowPage.value = val
-          pageSize.value = res.size
-          totals.value = res.total
-          drugsList.push(...res.data)
+            drugsList.length = 0
+            nowPage.value = val
+            pageSize.value = res.size
+            totals.value = res.total
+            drugsList.push(...res.data)
         })
-      }, 100);
-    };
-    handleSizeChange(1); // 初始化数据
-    </script>
+    }, 100);
+};
+handleSizeChange(1); // 初始化数据
+</script>
