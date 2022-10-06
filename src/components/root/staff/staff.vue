@@ -43,16 +43,12 @@
             </el-form-item>
             <el-form-item label="员工所属药房" :label-width="formLabelWidth">
                 <el-select v-model="staffEditForm.pharmacyId" placeholder="选择药房">
-                    <div v-for="pharmacyOption in pharmacyList">
-                        <el-option :label=pharmacyOption.pharmacyName :value=pharmacyOption.pharmacyId />
-                    </div>
+                    <el-option v-for="pharmacyOption in pharmacyList" :label=pharmacyOption.pharmacyName :value=pharmacyOption.pharmacyId />
                 </el-select>
             </el-form-item>
             <el-form-item label="员工职位" :label-width="formLabelWidth">
                 <el-select v-model="staffEditForm.authorityId" placeholder="选择职位">
-                    <div v-for="authorityOption in authorityList">
-                        <el-option :label=authorityOption.authorityName :value=authorityOption.authorityId />
-                    </div>
+                    <el-option v-for="authorityOption in authorityList" :label=authorityOption.authorityName :value=authorityOption.authorityId />
                 </el-select>
             </el-form-item>
         </el-form>
@@ -86,16 +82,12 @@
             </el-form-item>
             <el-form-item label="员工所属药房" :label-width="formLabelWidth">
                 <el-select v-model="staffAddForm.pharmacyId" placeholder="选择药房">
-                    <div v-for="pharmacyOption in pharmacyList">
-                        <el-option :label=pharmacyOption.pharmacyName :value=pharmacyOption.pharmacyId />
-                    </div>
+                    <el-option v-for="pharmacyOption in pharmacyList" :label=pharmacyOption.pharmacyName :value=pharmacyOption.pharmacyId />
                 </el-select>
             </el-form-item>
             <el-form-item label="员工职位" :label-width="formLabelWidth">
                 <el-select v-model="staffAddForm.authorityId" placeholder="选择职位">
-                    <div v-for="authorityOption in authorityList">
-                        <el-option :label=authorityOption.authorityName :value=authorityOption.authorityId />
-                    </div>
+                    <el-option v-for="authorityOption in authorityList" :label=authorityOption.authorityName :value=authorityOption.authorityId />
                 </el-select>
             </el-form-item>
         </el-form>

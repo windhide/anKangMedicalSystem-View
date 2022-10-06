@@ -32,9 +32,7 @@
             </el-form-item>
             <el-form-item label="药品类型" :label-width="formLabelWidth">
                 <el-select v-model="drugsEditForm.drugsTypeId" placeholder="选择药品类型">
-                    <div v-for="drugsTypeOption in drugsType">
-                        <el-option :label=drugsTypeOption.drugsTypeName :value=drugsTypeOption.drugsTypeId />
-                    </div>
+                    <el-option v-for="drugsTypeOption in drugsType" :label=drugsTypeOption.drugsTypeName :value=drugsTypeOption.drugsTypeId />
                 </el-select>
             </el-form-item>
             <el-form-item label="药物规格" :label-width="formLabelWidth">
@@ -42,9 +40,7 @@
             </el-form-item>
             <el-form-item label="药物单位" :label-width="formLabelWidth">
                 <el-select v-model="drugsEditForm.drugsUnitid" placeholder="选择药物单位">
-                    <div v-for="drugsUnitOption in drugsUnit">
-                        <el-option :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
-                    </div>
+                    <el-option  v-for="drugsUnitOption in drugsUnit" :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
                 </el-select>
             </el-form-item>
             <el-form-item label="药物产地" :label-width="formLabelWidth">
@@ -75,9 +71,7 @@
             </el-form-item>
             <el-form-item label="药品类型" :label-width="formLabelWidth">
                 <el-select v-model="drugsAddForm.drugsTypeId" placeholder="选择药品类型">
-                    <div v-for="drugsTypeOption in drugsType">
-                        <el-option :label=drugsTypeOption.drugsTypeName :value=drugsTypeOption.drugsTypeId />
-                    </div>
+                    <el-option v-for="drugsTypeOption in drugsType" :label=drugsTypeOption.drugsTypeName :value=drugsTypeOption.drugsTypeId />
                 </el-select>
             </el-form-item>
             <el-form-item label="药物规格" :label-width="formLabelWidth">
@@ -85,9 +79,7 @@
             </el-form-item>
             <el-form-item label="药物单位" :label-width="formLabelWidth">
                 <el-select v-model="drugsAddForm.drugsUnitid" placeholder="选择药物单位">
-                    <div v-for="drugsUnitOption in drugsUnit">
-                        <el-option :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
-                    </div>
+                    <el-option v-for="drugsUnitOption in drugsUnit" :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
                 </el-select>
             </el-form-item>
             <el-form-item label="药物产地" :label-width="formLabelWidth">
