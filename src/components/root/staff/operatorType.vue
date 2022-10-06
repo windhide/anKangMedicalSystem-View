@@ -1,8 +1,8 @@
 <template>
     <el-scrollbar>
         <el-table :data="operatorTypeList" max-height="700">
-            <el-table-column prop="operatorTypeId" label="药房操作类型Id" width="100" />
-            <el-table-column prop="operatorTypeName" label="药房操作类型名称" width="100" />
+            <el-table-column prop="operatorTypeId" label="药房操作类型Id" width="200" />
+            <el-table-column prop="operatorTypeName" label="药房操作类型名称" width="200" />
             <el-table-column fixed="right" label="操作">
                 <template #header>
                     操作

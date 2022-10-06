@@ -2,7 +2,7 @@
     <el-scrollbar>
         <el-table :data="authorityList" max-height="700">
             <el-table-column prop="authorityId" label="权限Id" width="100" />
-            <el-table-column prop="authorityName" label="权限名称" width="100" />
+            <el-table-column prop="authorityName" label="权限名称" width="200" />
             <el-table-column fixed="right" label="操作">
                 <template #header>
                     操作
