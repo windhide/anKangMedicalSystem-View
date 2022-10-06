@@ -9,6 +9,7 @@ import staff from '@/components/root/staff/staff.vue'
 import pharmacy from '@/components/root/staff/pharmacy.vue'
 import authority from '@/components/root/staff/authority.vue'
 import operatorType from '@/components/root/staff/operatorType.vue'
+import operator from '@/components/root/staff/operator.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -83,7 +84,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'operator',
             name: '药房操作记录',
-            component: rootViews,
+            component: operator ,
             props: {
               icon: 'MagicStick',
             },
