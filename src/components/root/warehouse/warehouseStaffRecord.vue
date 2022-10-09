@@ -1,12 +1,13 @@
 <template>
     <el-scrollbar>
         <el-table :data="warehouseList" max-height="700">
-            <el-table-column prop="warehouseId" label="仓库id" width="100" />
-            <el-table-column prop="warehouseName" label="仓库名" width="200" />
-            <el-table-column prop="pharmacy.pharmacyName" label="所属药房" width="200" />
-            <el-table-column prop="drugs.drugsName" label="药品" width="300" />
-            <el-table-column prop="drugsCount" label="药品数量" width="100" />
-            <el-table-column prop="warehouseLastTime" label="最后修改时间" width="350" />
+            <el-table-column prop="warehouseStaffRecordId" label="操作Id" width="100" />
+            <el-table-column prop="pharmacy.pharmacyName" label="药房" width="100" />
+            <el-table-column prop="drugs.drugsName" label="被操作药品" width="350" />
+            <el-table-column prop="drugsCount" label="数量" width="350" />
+            <el-table-column prop="staff.staffName" label="操作人员" width="100" />
+            <el-table-column prop="warehouseType.warehouseTypeId" label="操作类型" width="100" />
+            <el-table-column prop="createTime" label="操作时间" width="300" />
             <el-table-column fixed="right" label="操作">
                 <template #header>
                     操作
@@ -22,23 +23,28 @@
 
     <el-dialog v-model="EDIT_DIALOG" title="仓库信息修改" width="30%" align-center>
         <el-form :model="warehouseEditForm">
-            <el-form-item label="仓库名称" :label-width="formLabelWidth">
-                <el-input v-model="warehouseEditForm.warehouseName" autocomplete="off" />
-            </el-form-item>
-            <el-form-item label="所属药房" :label-width="formLabelWidth">
-                <el-select v-model="warehouseEditForm.pharmacyId" placeholder="选择操作类型" filterable>
-                    <el-option v-for="pharmacyOption in pharmacyList" :label="pharmacyOption.pharmacyName"
-                        :value="pharmacyOption.pharmacyId" />
+            <el-form-item label="操作者" :label-width="formLabelWidth">
+                <el-select v-model="warehouseEditForm.staffId" placeholder="选择操作者" filterable >
+                    <el-option v-for="staffOption in staffList" :label="staffOption.staffName" :value="staffOption.staffId" />
                 </el-select>
             </el-form-item>
-            <el-form-item label="药品" :label-width="formLabelWidth">
-                <el-select v-model="warehouseEditForm.drugsId" placeholder="选择药品" filterable>
-                    <el-option v-for="drugsOption in drugsList" :label="drugsOption.drugsName"
-                        :value="drugsOption.drugsId" />
+            <el-form-item label="操作药品" :label-width="formLabelWidth">
+                <el-select v-model="warehouseEditForm.drugsId" placeholder="选择药品" filterable >
+                    <el-option v-for="drugsOption in drugsList" :label="drugsOption.drugsName" :value="drugsOption.drugsId" />
+                </el-select>
+            </el-form-item>
+            <el-form-item label="所属药房" :label-width="formLabelWidth">
+                <el-select v-model="warehouseEditForm.pharmacyId" placeholder="选择操作类型" filterable >
+                    <el-option v-for="pharmacyOption in pharmacyList" :label="pharmacyOption.pharmacyName" :value="pharmacyOption.pharmacyId" />
                 </el-select>
             </el-form-item>
             <el-form-item label="药品数量" :label-width="formLabelWidth">
                 <el-input v-model="warehouseEditForm.drugsCount" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="操作类型" :label-width="formLabelWidth">
+                <el-select v-model="warehouseEditForm.pharmacyId" placeholder="选择操作类型" filterable >
+                    <el-option v-for="warehouseTypeOption in warehouseTypeList" :label="warehouseTypeOption.warehouseTypeName" :value="warehouseTypeOption.warehouseTypeId" />
+                </el-select>
             </el-form-item>
         </el-form>
         <template #footer>
@@ -51,23 +57,28 @@
 
     <el-dialog v-model="ADD_DIALOG" title="仓库信息添加" width="30%" align-center>
         <el-form :model="warehouseAddForm">
-            <el-form-item label="仓库名称" :label-width="formLabelWidth">
-                <el-input v-model="warehouseAddForm.warehouseName" autocomplete="off" />
-            </el-form-item>
-            <el-form-item label="所属药房" :label-width="formLabelWidth">
-                <el-select v-model="warehouseAddForm.pharmacyId" placeholder="选择操作类型" filterable>
-                    <el-option v-for="pharmacyOption in pharmacyList" :label="pharmacyOption.pharmacyName"
-                        :value="pharmacyOption.pharmacyId" />
+            <el-form-item label="操作者" :label-width="formLabelWidth">
+                <el-select v-model="warehouseAddForm.staffId" placeholder="选择操作者" filterable >
+                    <el-option v-for="staffOption in staffList" :label="staffOption.staffName" :value="staffOption.staffId" />
                 </el-select>
             </el-form-item>
-            <el-form-item label="药品" :label-width="formLabelWidth">
-                <el-select v-model="warehouseAddForm.drugsId" placeholder="选择药品" filterable>
-                    <el-option v-for="drugsOption in drugsList" :label="drugsOption.drugsName"
-                        :value="drugsOption.drugsId" />
+            <el-form-item label="操作药品" :label-width="formLabelWidth">
+                <el-select v-model="warehouseAddForm.drugsId" placeholder="选择药品" filterable >
+                    <el-option v-for="drugsOption in drugsList" :label="drugsOption.drugsName" :value="drugsOption.drugsId" />
+                </el-select>
+            </el-form-item>
+            <el-form-item label="所属药房" :label-width="formLabelWidth">
+                <el-select v-model="warehouseAddForm.pharmacyId" placeholder="选择操作类型" filterable >
+                    <el-option v-for="pharmacyOption in pharmacyList" :label="pharmacyOption.pharmacyName" :value="pharmacyOption.pharmacyId" />
                 </el-select>
             </el-form-item>
             <el-form-item label="药品数量" :label-width="formLabelWidth">
                 <el-input v-model="warehouseAddForm.drugsCount" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="操作类型" :label-width="formLabelWidth">
+                <el-select v-model="warehouseAddForm.pharmacyId" placeholder="选择操作类型" filterable >
+                    <el-option v-for="warehouseTypeOption in warehouseTypeList" :label="warehouseTypeOption.warehouseTypeName" :value="warehouseTypeOption.warehouseTypeId" />
+                </el-select>
             </el-form-item>
         </el-form>
         <template #footer>
@@ -93,14 +104,14 @@ let cacheData = "";
 const EDIT_DIALOG = ref(false) // 修改dialog窗口开关
 const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '100px' // dialog中组件的宽度
-const URL = "warehouse" // 本组件内通用的url
+const URL = "warehouseStaffRecord" // 本组件内通用的url
 
-CURRENCY_SELECT("pharmacy").then(res => {
+CURRENCY_SELECT("pharmacy").then(res =>{
     pharmacyList.length = 0
     pharmacyList.push(...res.data)
 })
 
-CURRENCY_SELECT("warehouseType").then(res => {
+CURRENCY_SELECT("warehouseType").then(res =>{
     warehouseTypeList.length = 0
     warehouseTypeList.push(...res.data)
 })
@@ -117,18 +128,18 @@ CURRENCY_SELECT("drugs").then(res => {
 
 let warehouseEditForm = reactive({
     warehouseId: 0,
-    warehouseName: "",
+    staffId: "",
     drugsId: "",
     pharmacyId: "",
     drugsCount: "",
-    warehouseLastTime: "",
+    warehouseTypeId: "",
 })
 let warehouseAddForm = reactive({
+    staffId: "",
     drugsId: "",
-    warehouseName: "",
     pharmacyId: "",
     drugsCount: "",
-    warehouseLastTime: "",
+    warehouseTypeId: "",
 })
 
 function RELOAD() {
@@ -164,9 +175,9 @@ async function DELETE(url: String, data: any, operationId: Number) {
 
 async function ADD(url: String, data: any, operationId: Number) {
     ADD_DIALOG.value = !ADD_DIALOG.value;
-    warehouseAddForm.warehouseLastTime = GET_NOW_DATE_FORMATE()
+
     if (!ADD_DIALOG.value && data == 'null' && FORM_STATS_JUDGE(warehouseAddForm)) {
-        await CURRENCY_REQUEST(url, warehouseAddForm, CURRENCY_OPERATION_API(operationId, "->" + TOSTRING(warehouseAddForm)))
+        await CURRENCY_REQUEST(url, warehouseAddForm, CURRENCY_OPERATION_API(operationId, "->"+TOSTRING(warehouseAddForm)))
         warehouseAddForm = CLEAR_FORM(warehouseAddForm)
     }
     RELOAD()
@@ -176,11 +187,11 @@ async function EDIT(url: String, data: any, operationId: Number) {
 
     if (!EDIT_DIALOG.value && data != 'null') {
         warehouseEditForm.warehouseId = data.warehouseId
-        warehouseEditForm.warehouseName = data.warehouseName
+        warehouseEditForm.staffId = data.staffId
         warehouseEditForm.drugsId = data.drugsId
         warehouseEditForm.pharmacyId = data.pharmacyId
         warehouseEditForm.drugsCount = data.drugsCount
-        warehouseEditForm.warehouseLastTime = data.warehouseLastTime
+        warehouseEditForm.warehouseTypeId = data.warehouseTypeId
 
         cacheData = data.warehouseName
     }
@@ -188,7 +199,6 @@ async function EDIT(url: String, data: any, operationId: Number) {
     EDIT_DIALOG.value = !EDIT_DIALOG.value;
 
     if (!EDIT_DIALOG.value && data == 'null') {
-        warehouseEditForm.warehouseLastTime = GET_NOW_DATE_FORMATE()
         await CURRENCY_REQUEST(url, warehouseEditForm, CURRENCY_OPERATION_API(operationId, "前->" + TOSTRING(data) + ",后->" + TOSTRING(warehouseEditForm)))
         RELOAD()
         warehouseEditForm = CLEAR_FORM(warehouseEditForm)

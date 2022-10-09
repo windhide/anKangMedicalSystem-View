@@ -12,6 +12,7 @@ import operatorType from '@/components/root/staff/operatorType.vue'
 import operator from '@/components/root/staff/operator.vue'
 import warehouseType from '@/components/root/warehouse/warehouseType.vue'
 import warehouse from '@/components/root/warehouse/warehouse.vue'
+import warehouseStaffRecord from '@/components/root/warehouse/warehouseStaffRecord.vue'
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -125,7 +126,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'record',
             name: '仓库操作记录',
-            component: rootViews,
+            component: warehouseStaffRecord,
             props: {
               icon: 'MagicStick',
             },
