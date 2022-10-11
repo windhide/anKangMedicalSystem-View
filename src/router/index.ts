@@ -14,6 +14,7 @@ import warehouseType from '@/components/root/warehouse/warehouseType.vue'
 import warehouse from '@/components/root/warehouse/warehouse.vue'
 import warehouseStaffRecord from '@/components/root/warehouse/warehouseStaffRecord.vue'
 import userLevelType from '@/components/root/user/userLevelType.vue'
+import user from '@/components/root/user/user.vue'
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -144,7 +145,7 @@ export const routes: Array<RouteRecordRaw> = [
           {
             path: 'main',
             name: '用户信息',
-            component: rootViews,
+            component: user,
             props: {
               icon: 'MagicStick',
             },
