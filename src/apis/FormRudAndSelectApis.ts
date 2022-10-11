@@ -1,6 +1,5 @@
 import { ElMessageBox, ElMessage } from "element-plus"
 import axios from "axios"
-import { TRAP_FOCUS_HANDLER } from "element-plus/es/directives/trap-focus"
 
 class Operation {
     opreationUrl = ""
