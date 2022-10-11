@@ -13,6 +13,7 @@ import operator from '@/components/root/staff/operator.vue'
 import warehouseType from '@/components/root/warehouse/warehouseType.vue'
 import warehouse from '@/components/root/warehouse/warehouse.vue'
 import warehouseStaffRecord from '@/components/root/warehouse/warehouseStaffRecord.vue'
+import userLevelType from '@/components/root/user/userLevelType.vue'
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -150,7 +151,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'levelType',
             name: '用户VIP等级管理',
-            component: rootViews,
+            component: userLevelType,
             props: {
               icon: 'MagicStick',
             },
