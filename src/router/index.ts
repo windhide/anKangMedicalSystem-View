@@ -49,14 +49,14 @@ export const routes: Array<RouteRecordRaw> = [
             name: '药品类型信息',
             component: drugsType,
             props: {
-              icon: 'Collection',
+              icon: 'Histogram',
             },
           }, {
             path: 'unit',
             name: '药品规格单位信息',
             component: drugsUnit,
             props: {
-              icon: 'MagicStick',
+              icon: 'InfoFilled',
             },
           }
         ]
@@ -65,7 +65,7 @@ export const routes: Array<RouteRecordRaw> = [
         path: 'staff',
         name: '员工管理',
         props: {
-          icon: 'MagicStick',
+          icon: 'Platform',
         },
         children: [
           {
@@ -73,35 +73,35 @@ export const routes: Array<RouteRecordRaw> = [
             name: '员工信息',
             component: staff,
             props: {
-              icon: 'MagicStick',
+              icon: 'PictureRounded',
             },
           }, {
             path: 'pharmacy',
             name: '药房信息',
             component: pharmacy,
             props: {
-              icon: 'MagicStick',
+              icon: 'FirstAidKit',
             },
           }, {
             path: 'authority',
             name: '权限信息',
             component: authority,
             props: {
-              icon: 'MagicStick',
+              icon: 'Opportunity',
             },
           }, {
             path: 'operator',
             name: '药房操作记录',
             component: operator,
             props: {
-              icon: 'MagicStick',
+              icon: 'Flag',
             },
           }, {
             path: 'operatorType',
             name: '药房操作类型',
             component: operatorType,
             props: {
-              icon: 'MagicStick',
+              icon: 'Stopwatch',
             },
           }
         ]
@@ -110,7 +110,7 @@ export const routes: Array<RouteRecordRaw> = [
         path: 'wareHouse',
         name: '仓库管理',
         props: {
-          icon: 'MagicStick',
+          icon: 'SuitcaseLine',
         },
         children: [
           {
@@ -118,21 +118,21 @@ export const routes: Array<RouteRecordRaw> = [
             name: '仓库信息',
             component: warehouse,
             props: {
-              icon: 'MagicStick',
+              icon: 'Box',
             },
           }, {
             path: 'type',
             name: '仓库类型信息',
             component: warehouseType,
             props: {
-              icon: 'MagicStick',
+              icon: 'Document',
             },
           }, {
             path: 'record',
             name: '仓库操作记录',
             component: warehouseStaffRecord,
             props: {
-              icon: 'MagicStick',
+              icon: 'Coin',
             },
           }
         ]
@@ -141,7 +141,7 @@ export const routes: Array<RouteRecordRaw> = [
         path: 'user',
         name: '用户管理',
         props: {
-          icon: 'MagicStick',
+          icon: 'Medal',
         },
         children: [
           {
@@ -149,14 +149,14 @@ export const routes: Array<RouteRecordRaw> = [
             name: '用户信息',
             component: user,
             props: {
-              icon: 'MagicStick',
+              icon: 'User',
             },
           }, {
             path: 'levelType',
             name: '用户VIP等级管理',
             component: userLevelType,
             props: {
-              icon: 'MagicStick',
+              icon: 'Guide',
             },
           }, {
             path: 'record',
@@ -170,7 +170,7 @@ export const routes: Array<RouteRecordRaw> = [
             name: '用户诊断记录',
             component: symptom,
             props: {
-              icon: 'magicStick',
+              icon: 'CirclePlusFilled',
             },
           }
         ]
