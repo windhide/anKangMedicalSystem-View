@@ -1,7 +1,7 @@
 <template>
     <el-scrollbar>
         <el-table :data="userList" max-height="700">
-            <el-table-column prop="userId" label="用户Id" width="100" />
+            <el-table-column prop="userId" label="用户Id" width="120" />
             <el-table-column prop="userName" label="用户名" width="100" />
             <el-table-column prop="userUserName" label="账号" width="100" />
             <el-table-column prop="userSex" label="性别" width="100" />
