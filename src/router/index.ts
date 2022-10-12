@@ -15,6 +15,7 @@ import warehouse from '@/components/root/warehouse/warehouse.vue'
 import warehouseStaffRecord from '@/components/root/warehouse/warehouseStaffRecord.vue'
 import userLevelType from '@/components/root/user/userLevelType.vue'
 import user from '@/components/root/user/user.vue'
+import symptom from '@/components/root/user/symptom.vue'
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -90,7 +91,7 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'operator',
             name: '药房操作记录',
-            component: operator ,
+            component: operator,
             props: {
               icon: 'MagicStick',
             },
@@ -162,6 +163,13 @@ export const routes: Array<RouteRecordRaw> = [
             component: rootViews,
             props: {
               icon: 'MagicStick',
+            },
+          }, {
+            path: 'symptom',
+            name: '用户诊断记录',
+            component: symptom,
+            props: {
+              icon: 'magicStick',
             },
           }
         ]
