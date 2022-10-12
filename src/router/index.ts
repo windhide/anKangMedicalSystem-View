@@ -16,6 +16,7 @@ import warehouseStaffRecord from '@/components/root/warehouse/warehouseStaffReco
 import userLevelType from '@/components/root/user/userLevelType.vue'
 import user from '@/components/root/user/user.vue'
 import symptom from '@/components/root/user/symptom.vue'
+import purchaseRecord from '@/components/root/user/purchaseRecord.vue'
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -160,9 +161,9 @@ export const routes: Array<RouteRecordRaw> = [
           }, {
             path: 'record',
             name: '用户购买记录',
-            component: rootViews,
+            component: purchaseRecord,
             props: {
-              icon: 'MagicStick',
+              icon: 'ShoppingCartFull',
             },
           }, {
             path: 'symptom',
