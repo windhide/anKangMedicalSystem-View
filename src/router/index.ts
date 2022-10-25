@@ -17,9 +17,15 @@ import userLevelType from '@/components/root/user/userLevelType.vue'
 import user from '@/components/root/user/user.vue'
 import symptom from '@/components/root/user/symptom.vue'
 import purchaseRecord from '@/components/root/user/purchaseRecord.vue'
+import rootLogin from '@/views/rootLoginViews.vue'
 
 
 export const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/rootLogin',
+    name: 'rootLogin',
+    component: rootLogin,
+  },
   {
     path: '/staff',
     name: 'staffViews',

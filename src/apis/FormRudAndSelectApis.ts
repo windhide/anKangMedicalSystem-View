@@ -27,7 +27,7 @@ export async function CURRENCY_REQUEST(url: String, data: any, operation: Operat
         return
     }
 
-    await ElMessageBox.confirm(
+    return await ElMessageBox.confirm(
         '确认' + operation.operationName + '>>' + operation.dataShowName + '吗?',
         operation.operationName + '确认',
         {
@@ -35,16 +35,19 @@ export async function CURRENCY_REQUEST(url: String, data: any, operation: Operat
             cancelButtonText: '取消',
             type: 'warning',
         }
-    ).then(() => {
-        axios.post(url + "/" + operation.opreationUrl + "/", data).then((res: any) => {
+    ).then(async () => {
+        await axios.post(url + "/" + operation.opreationUrl + "/", data).then( async (res: any) => {
             if (res.data == true) {
-                ElMessage({ type: 'success', message: '数据>>' + operation.dataShowName + '<<' + operation.operationName + '成功!' })
+                await ElMessage({ type: 'success', message: '数据>>' + operation.dataShowName + '<<' + operation.operationName + '成功!' })
+                return true
             } else {
-                ElMessage({ type: 'error', message: '因为服务器原因，数据>>' + operation.dataShowName + '<<' + operation.operationName + '失败!' })
+                await ElMessage({ type: 'error', message: '因为服务器原因，数据>>' + operation.dataShowName + '<<' + operation.operationName + '失败!' })
+                return false
             }
         })
     }).catch(() => {
         ElMessage({type: 'info',message: '取消操作',})
+        return false
     })
 }
 
