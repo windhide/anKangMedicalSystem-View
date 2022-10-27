@@ -63,7 +63,8 @@ const NAVIGATION = getNavigation("root")
 
 function logOut(){
   store.commit('logOut')
-  router.go("/root")
+  router.push("/root")
+  router.go(0)
 }
 
 </script>

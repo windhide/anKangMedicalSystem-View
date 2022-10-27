@@ -1,5 +1,6 @@
 import { ElMessageBox, ElMessage } from "element-plus"
 import axios from "@/apis/axiosTokenApi"
+import router from "@/router"
 
 class Operation {
     opreationUrl = ""
@@ -8,6 +9,13 @@ class Operation {
 }
 
 export function CURRENCY_SELECT(url:String){
+    if(localStorage.getItem("username") == "" || localStorage.getItem("username") == null){
+        setTimeout(() => {
+            ElMessage({type: 'error',message: '没有登录！操作取消,请先登陆！',})
+            router.push("/rootlogin")
+        }, 300);
+        return 
+    }
     return axios.post(url+"/select/list").then((res:any) =>{
         return res;
     })
