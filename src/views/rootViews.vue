@@ -2,45 +2,45 @@
   <el-container class="layout-container-demo">
     <el-aside width="12%">
       <el-scrollbar>
-        <el-menu :default-openeds="['0','1','2','3']" v-for="(navigation,index) in NAVIGATION.children">
+        <el-menu :default-openeds="['0', '1', '2', '3']" v-for="(navigation,index) in NAVIGATION.children">
           <el-sub-menu :index="String(index)">
             <template #title>
               <el-icon>
                 <component :is="navigation.icon" />
-              </el-icon>{{navigation.childrenName}}
+              </el-icon>{{ navigation.childrenName }}
             </template>
-            <div v-for="(children,childrenIndex) in navigation.children">
-              <router-link :to="NAVIGATION.path+navigation.childrenPath+children.childrenPath">
-                <el-menu-item :index="index+'-'+childrenIndex">
+            <div v-for="(children, childrenIndex) in navigation.children">
+              <router-link :to="NAVIGATION.path + navigation.childrenPath + children.childrenPath">
+                <el-menu-item :index="index + '-' + childrenIndex">
                   <el-icon>
                     <component :is="children.icon" />
                   </el-icon>
-                  {{children.childrenName}}
+                  {{ children.childrenName }}
                 </el-menu-item>
               </router-link>
             </div>
           </el-sub-menu>
-
         </el-menu>
       </el-scrollbar>
     </el-aside>
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
+
+
         <div class="toolbar">
           <el-dropdown>
             <el-icon style="margin-right: 8px; margin-top: 1px">
               <setting />
             </el-icon>
-            <template #dropdown>
+            <template #dropdown  v-if="loginName != ''">
               <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
+                <el-dropdown-item @click="logOut()">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>Tom</span>
+          <span v-if="loginName == ''"><a href="/rootlogin">请先去登陆</a></span>
+          <span v-else>{{ "欢迎您" + loginName }}</span>
         </div>
       </el-header>
 
@@ -54,8 +54,17 @@
 <script lang="ts" setup>
 import { Setting } from '@element-plus/icons-vue'
 import { getNavigation } from '@/apis/NavigationApis'
+import store from '@/store/index'
+import router from '@/router';
+
+const loginName = localStorage.getItem("username")
 
 const NAVIGATION = getNavigation("root")
+
+function logOut(){
+  store.commit('logOut')
+  router.go("/root")
+}
 
 </script>
 

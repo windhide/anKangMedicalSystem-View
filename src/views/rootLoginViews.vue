@@ -43,7 +43,7 @@ function Login() {
 	if (FORM_STATS_JUDGE(loginForm)) {
 		axios.post("auth/login", loginForm).then(async (res) => {
 			if (res.data.code == 0) {
-				console.log(res.data.data.refreshToken)
+				ElMessage({ type: 'success', message: '登录成功，正在跳转...' })
 				await store.commit("changeLogin", { refreshToken: res.data.data.refreshToken, token: res.data.data.token, userId: res.data.data.userId, username: res.data.data.username })
 				await router.push("/root")
 			}else{
