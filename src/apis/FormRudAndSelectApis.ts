@@ -1,5 +1,5 @@
 import { ElMessageBox, ElMessage } from "element-plus"
-import axios from "axios"
+import axios from "@/apis/axiosTokenApi"
 
 class Operation {
     opreationUrl = ""

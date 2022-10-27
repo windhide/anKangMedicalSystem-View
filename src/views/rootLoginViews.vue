@@ -1,33 +1,58 @@
 <template>
 
-<div class="container">
-	<div class="screen">
-		<div class="screen__content">
-			<form class="login">
-                安康药房管理系统 - 后台
-				<div class="login__field">
-					<input type="text" class="login__input" placeholder="账号">
+	<div class="container">
+		<div class="screen">
+			<div class="screen__content">
+				<div class="login">
+					安康药房管理系统 - 后台
+					<div class="login__field">
+						<input v-model="loginForm.username" type="text" class="login__input" placeholder="账号">
+					</div>
+					<div class="login__field">
+						<i class="login__icon fas fa-lock"></i>
+						<input v-model="loginForm.password" type="password" class="login__input" placeholder="密码">
+					</div>
+					<button class="button login__submit" @click="Login">
+						<span class="">现在登录</span>
+					</button>
 				</div>
-				<div class="login__field">
-					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="密码">
-				</div>
-				<button class="button login__submit">
-					<span class="">现在登录</span>
-				</button>				
-			</form>
+			</div>
+			<div class="screen__background">
+				<span class="screen__background__shape screen__background__shape4"></span>
+				<span class="screen__background__shape screen__background__shape3"></span>
+				<span class="screen__background__shape screen__background__shape2"></span>
+				<span class="screen__background__shape screen__background__shape1"></span>
+			</div>
 		</div>
-		<div class="screen__background">
-			<span class="screen__background__shape screen__background__shape4"></span>
-			<span class="screen__background__shape screen__background__shape3"></span>		
-			<span class="screen__background__shape screen__background__shape2"></span>
-			<span class="screen__background__shape screen__background__shape1"></span>
-		</div>		
 	</div>
-</div>
 </template>
 
 <script lang="ts" setup>
+import { FORM_STATS_JUDGE } from '@/apis/FormRudAndSelectApis';
+import axios from 'axios';
+import { reactive } from 'vue';
+import store from '@/store/index'
+import router from '@/router/index'
+import { ElMessage } from 'element-plus';
+const loginForm = reactive({
+	username: "",
+	password: "",
+})
+
+function Login() {
+	if (FORM_STATS_JUDGE(loginForm)) {
+		axios.post("auth/login", loginForm).then(async (res) => {
+			if (res.data.code == 0) {
+				console.log(res.data.data.refreshToken)
+				await store.commit("changeLogin", { refreshToken: res.data.data.refreshToken, token: res.data.data.token, userId: res.data.data.userId, username: res.data.data.username })
+				await router.push("/root")
+			}else{
+				ElMessage({ type: 'error', message: '用户名或密码输入错误！!' })
+			}
+		})
+	}
+}
+
 
 </script>
 
@@ -37,12 +62,12 @@
 * {
 	box-sizing: border-box;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 	font-family: Raleway, sans-serif;
 }
 
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);
 }
 
 .container {
@@ -50,24 +75,24 @@ body {
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
-    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+	background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
 }
 
-.screen {		
-	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
-	position: relative;	
+.screen {
+	background: linear-gradient(90deg, #5D54A4, #7C78B8);
+	position: relative;
 	height: 600px;
-	width: 360px;	
+	width: 360px;
 	box-shadow: 0px 0px 24px #5C5696;
 }
 
 .screen__content {
 	z-index: 1;
-	position: relative;	
+	position: relative;
 	height: 100%;
 }
 
-.screen__background {		
+.screen__background {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -75,7 +100,7 @@ body {
 	bottom: 0;
 	z-index: 0;
 	-webkit-clip-path: inset(0 0 0 0);
-	clip-path: inset(0 0 0 0);	
+	clip-path: inset(0 0 0 0);
 }
 
 .screen__background__shape {
@@ -86,18 +111,18 @@ body {
 .screen__background__shape1 {
 	height: 520px;
 	width: 520px;
-	background: #FFF;	
+	background: #FFF;
 	top: -50px;
-	right: 120px;	
+	right: 120px;
 	border-radius: 0 72px 0 0;
 }
 
 .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
-	background: #6C63AC;	
+	background: #6C63AC;
 	top: -172px;
-	right: 0;	
+	right: 0;
 	border-radius: 32px;
 }
 
@@ -106,16 +131,16 @@ body {
 	width: 190px;
 	background: linear-gradient(270deg, #5D54A4, #6A679E);
 	top: -24px;
-	right: 0;	
+	right: 0;
 	border-radius: 32px;
 }
 
 .screen__background__shape4 {
 	height: 400px;
 	width: 200px;
-	background: #7E7BB9;	
+	background: #7E7BB9;
 	top: 420px;
-	right: 50px;	
+	right: 50px;
 	border-radius: 60px;
 }
 
@@ -126,8 +151,8 @@ body {
 }
 
 .login__field {
-	padding: 20px 0px;	
-	position: relative;	
+	padding: 20px 0px;
+	position: relative;
 }
 
 .login__icon {
@@ -185,7 +210,7 @@ body {
 	color: #7875B5;
 }
 
-.social-login {	
+.social-login {
 	position: absolute;
 	height: 140px;
 	width: 160px;
@@ -204,11 +229,11 @@ body {
 .social-login__icon {
 	padding: 20px 10px;
 	color: #fff;
-	text-decoration: none;	
+	text-decoration: none;
 	text-shadow: 0px 0px 8px #7875B5;
 }
 
 .social-login__icon:hover {
-	transform: scale(1.5);	
+	transform: scale(1.5);
 }
 </style>
