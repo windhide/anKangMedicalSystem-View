@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import rootViews from '@/views/rootViews.vue'
 import staffViews from '@/views/staffViews.vue'
-import userViews from '@/views/userViews.vue'
 import drugs from '@/components/root/drugs/drugs.vue'
 import drugsType from '@/components/root/drugs/drugsType.vue'
 import drugsUnit from '@/components/root/drugs/drugsUnit.vue'
@@ -18,6 +17,9 @@ import user from '@/components/root/user/user.vue'
 import symptom from '@/components/root/user/symptom.vue'
 import purchaseRecord from '@/components/root/user/purchaseRecord.vue'
 import rootLogin from '@/views/rootLoginViews.vue'
+// 以上是后台的导入组件component   
+import userViews from '@/views/userViews.vue'
+import userLoginViews from  "@/views/userLoginViews.vue"
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -25,6 +27,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/rootLogin',
     name: 'rootLogin',
     component: rootLogin,
+  },
+  {
+    path: '/userLogin',
+    name: 'userLogin',
+    component: userLoginViews,
   },
   {
     path: '/staff',
