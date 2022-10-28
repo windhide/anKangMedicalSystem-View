@@ -8,15 +8,23 @@ class Operation {
     dataShowName = ""
 }
 
-export function CURRENCY_SELECT(url:String){
-    if(localStorage.getItem("username") == "" || localStorage.getItem("username") == null){
+export function CURRENCY_SELECT(url: String) {
+    if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
         setTimeout(() => {
-            ElMessage({type: 'error',message: '没有登录！操作取消,请先登陆！',})
+            ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
             router.push("/rootlogin")
         }, 300);
-        return 
+        return
     }
-    return axios.post(url+"/select/list").then((res:any) =>{
+    return axios.post(url + "/select/list").then((res: any) => {
+        console.log(res.data)
+        if (res.data.code == 2002) {
+            setTimeout(() => {
+                ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
+                router.push("/rootlogin")
+            }, 300);
+            return;
+        }
         return res;
     })
 }
@@ -44,7 +52,14 @@ export async function CURRENCY_REQUEST(url: String, data: any, operation: Operat
             type: 'warning',
         }
     ).then(async () => {
-        await axios.post(url + "/" + operation.opreationUrl + "/", data).then( async (res: any) => {
+        await axios.post(url + "/" + operation.opreationUrl + "/", data).then(async (res: any) => {
+            if (res.data.code == 2002) {
+                setTimeout(() => {
+                    ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
+                    router.push("/rootlogin")
+                }, 300);
+                return;
+            }
             if (res.data == true) {
                 await ElMessage({ type: 'success', message: '数据>>' + operation.dataShowName + '<<' + operation.operationName + '成功!' })
                 return true
@@ -54,7 +69,7 @@ export async function CURRENCY_REQUEST(url: String, data: any, operation: Operat
             }
         })
     }).catch(() => {
-        ElMessage({type: 'info',message: '取消操作',})
+        ElMessage({ type: 'info', message: '取消操作', })
         return false
     })
 }
@@ -99,7 +114,7 @@ export function FORM_STATS_JUDGE(data: any) {
 
 export function CLEAR_FORM(data: any) {
     for (let key in data) {
-        switch(typeof(data[key])){
+        switch (typeof (data[key])) {
             case "number":
                 data[key] = 0
             case "string":
@@ -109,12 +124,12 @@ export function CLEAR_FORM(data: any) {
     return data
 }
 
-export function TOSTRING(data: any){
+export function TOSTRING(data: any) {
     let cacheString = "{"
     for (let key in data) {
-        cacheString+= key +" : "+data[key]+",\t"
+        cacheString += key + " : " + data[key] + ",\t"
     }
-    cacheString+="}"
+    cacheString += "}"
     return cacheString
 }
 
