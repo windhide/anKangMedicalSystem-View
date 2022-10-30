@@ -20,6 +20,9 @@ import rootLogin from '@/views/rootLoginViews.vue'
 // 以上是后台的导入组件component   
 import userViews from '@/views/userViews.vue'
 import userLoginViews from  "@/views/userLoginViews.vue"
+import shopingCar from "@/components/user/shopingCar.vue"
+import checkDrugs from "@/components/user/checkDrugs.vue"
+import userData from "@/components/user/userData.vue"
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -192,8 +195,53 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
-    name: 'userViews',
+    name: 'user',
     component: userViews,
+    children: [
+      {
+        path: "shoping",
+        name: "购物功能",
+        props: {
+          icon: 'ShoppingCart',
+        },
+        children:[
+          {
+            path: "drugs",
+            name: "浏览药品",
+            component: checkDrugs,
+            props:{
+              icon:'FirstAidKit',
+            }
+          },
+          {
+            path: "car",
+            name: "购物车",
+            component: shopingCar,
+            props:{
+              icon:'ShoppingCartFull',
+            }
+          }
+        ]
+      },
+      {
+        path: "setting",
+        name: "设置",
+        props: {
+          icon: 'Setting',
+        },
+        children:[
+          {
+            path: "userData",
+            name: "修改个人资料",
+            component: userData,
+            props:{
+              icon:'User',
+            }
+
+          }
+        ]
+      }
+    ]
   },
 ]
 

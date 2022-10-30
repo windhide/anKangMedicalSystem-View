@@ -10,7 +10,7 @@
               </el-icon>{{ navigation.childrenName }}
             </template>
             <div v-for="(children, childrenIndex) in navigation.children">
-              <router-link :to="NAVIGATION.path + navigation.childrenPath + children.childrenPath">
+              <router-link :to="navigation.childrenPath + children.childrenPath">
                 <el-menu-item :index="index + '-' + childrenIndex">
                   <el-icon>
                     <component :is="children.icon" />
@@ -59,11 +59,13 @@ import router from '@/router';
 
 const loginName = localStorage.getItem("username")
 
-const NAVIGATION = getNavigation("user")
+const NAVIGATION = getNavigation("")
+
+console.log(NAVIGATION)
 
 function logOut(){
   store.commit('logOut')
-  router.push("/user")
+  router.push("/")
   router.go(0)
 }
 

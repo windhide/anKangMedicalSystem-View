@@ -8,6 +8,7 @@ export function QUERY_DRUGS_FOR_LIST(page:number){
         if (res.data.code == 2002) {
             setTimeout(() => {
                 ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
+                console.log(router.currentRoute.value.path)
                 router.push("/rootlogin")
             }, 300);
             return;

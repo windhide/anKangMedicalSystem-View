@@ -4,7 +4,7 @@
 		<div class="screen">
 			<div class="screen__content">
 				<div class="login">
-					安康药房管理系统
+					安康药房系统
 					<div class="login__field">
 						<input v-model="loginForm.username" type="text" class="login__input" placeholder="账号">
 					</div>
@@ -41,11 +41,11 @@ const loginForm = reactive({
 
 function Login() {
 	if (FORM_STATS_JUDGE(loginForm)) {
-		axios.post("auth/login", loginForm).then(async (res) => {
+		axios.post("auth/userLogin", loginForm).then(async (res) => {
 			if (res.data.code == 0) {
 				ElMessage({ type: 'success', message: '登录成功，正在跳转...' })
 				await store.commit("changeLogin", { refreshToken: res.data.data.refreshToken, token: res.data.data.token, userId: res.data.data.userId, username: res.data.data.username })
-				await router.push("/root")
+				await router.push("/")
 			}else{
 				ElMessage({ type: 'error', message: '用户名或密码输入错误！!' })
 			}
