@@ -39,7 +39,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span v-if="loginName == ''"><a href="/rootlogin">请先去登陆</a></span>
+          <span v-if="loginName == ''"><a href="/userLogin">请先去登陆</a></span>
           <span v-else>{{ "欢迎您" + loginName }}</span>
         </div>
       </el-header>
@@ -61,12 +61,9 @@ const loginName = localStorage.getItem("username")
 
 const NAVIGATION = getNavigation("")
 
-console.log(NAVIGATION)
-
 function logOut(){
   store.commit('logOut')
-  router.push("/")
-  router.go(0)
+  router.push("/userLogin")
 }
 
 </script>

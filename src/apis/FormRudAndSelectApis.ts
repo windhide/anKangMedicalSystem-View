@@ -8,6 +8,36 @@ class Operation {
     dataShowName = ""
 }
 
+export function CURRENCY_SELECT_BY_CONDITION(url: String,data: any) {
+    if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
+        setTimeout(() => {
+            ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
+            if (router.currentRoute.value.path.indexOf("root")) {
+                router.push("/rootlogin")
+            } else {
+                router.push("/userLogin")
+            }
+
+        }, 300);
+        return
+    }
+    return axios.post(url+"",data).then((res: any) => {
+        console.log(res.data)
+        if (res.data.code == 2002) {
+            setTimeout(() => {
+                ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
+                if (router.currentRoute.value.path.indexOf("root")) {
+                    router.push("/rootlogin")
+                } else {
+                    router.push("/userLogin")
+                }
+            }, 300);
+            return;
+        }
+        return res;
+    })
+}
+
 export function CURRENCY_SELECT(url: String) {
     if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
         setTimeout(() => {
