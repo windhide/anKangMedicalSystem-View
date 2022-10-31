@@ -46,9 +46,9 @@ function Login() {
 				ElMessage({ type: 'success', message: '登录成功，正在跳转...' })
 				await store.commit("changeLogin", { refreshToken: res.data.data.refreshToken, token: res.data.data.token, userId: res.data.data.userId, username: res.data.data.username })
 				await router.push("/")
-			}else{
-				ElMessage({ type: 'error', message: '用户名或密码输入错误！!' })
 			}
+		}).catch(()=>{
+            ElMessage({ type: 'error', message: '账号或者密码有误！请检查！', })
 		})
 	}
 }

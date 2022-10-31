@@ -147,12 +147,12 @@ let drugsAddForm = reactive({
     drugsCreatTime: "",
 })
 
-CURRENCY_SELECT("drugsUnit").then(res => { // 赋值unit
+CURRENCY_SELECT("drugsUnit")?.then(res => { // 赋值unit
     drugsUnit.length = 0
     drugsUnit.push(...res.data);
 })
 
-CURRENCY_SELECT("drugsType").then(res => { // 赋值type
+CURRENCY_SELECT("drugsType")?.then(res => { // 赋值type
     drugsType.length = 0
     drugsType.push(...res.data);
 })

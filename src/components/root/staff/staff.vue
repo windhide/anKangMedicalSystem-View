@@ -114,12 +114,12 @@ const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '100px' // dialog中组件的宽度
 const URL = "staff" // 本组件内通用的url
 
-CURRENCY_SELECT("pharmacy").then(res =>{
+CURRENCY_SELECT("pharmacy")?.then(res =>{
     pharmacyList.length = 0
     pharmacyList.push(...res.data)
 })
 
-CURRENCY_SELECT("authority").then(res =>{
+CURRENCY_SELECT("authority")?.then(res =>{
     authorityList.length = 0;
     authorityList.push(...res.data)
 })
@@ -151,7 +151,7 @@ let staffAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT(URL).then(res => {
+        CURRENCY_SELECT(URL)?.then(res => {
             staffList.length = 0
             staffList.push(...res.data)
         })

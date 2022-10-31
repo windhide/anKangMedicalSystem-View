@@ -60,12 +60,12 @@ const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '100px' // dialog中组件的宽度
 const URL = "operatorType" // 本组件内通用的url
 
-CURRENCY_SELECT("operatorType").then(res =>{
+CURRENCY_SELECT("operatorType")?.then(res =>{
     operatorTypeList.length = 0
     operatorTypeList.push(...res.data)
 })
 
-CURRENCY_SELECT("operatorType").then(res =>{
+CURRENCY_SELECT("operatorType")?.then(res =>{
     operatorTypeList.length = 0;
     operatorTypeList.push(...res.data)
 })
@@ -81,7 +81,7 @@ let operatorTypeAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT(URL).then(res => {
+        CURRENCY_SELECT(URL)?.then(res => {
             operatorTypeList.length = 0
             operatorTypeList.push(...res.data)
         })

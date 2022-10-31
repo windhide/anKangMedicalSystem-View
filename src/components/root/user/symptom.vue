@@ -84,11 +84,11 @@ const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '100px' // dialog中组件的宽度
 const URL = "symptom" // 本组件内通用的url
 
-CURRENCY_SELECT("staff").then(res => {
+CURRENCY_SELECT("staff")?.then(res => {
     staffList.length = 0;
     staffList.push(...res.data)
 })
-CURRENCY_SELECT("user").then(res => {
+CURRENCY_SELECT("user")?.then(res => {
     userList.length = 0;
     userList.push(...res.data)
 })
@@ -108,7 +108,7 @@ let symptomAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT(URL).then(res => {
+        CURRENCY_SELECT(URL)?.then(res => {
             symptomList.length = 0
             symptomList.push(...res.data)
         })

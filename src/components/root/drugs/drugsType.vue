@@ -81,7 +81,7 @@ let drugsTypeAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT(URL).then(res => {
+        CURRENCY_SELECT(URL)?.then(res => {
             drugsType.length = 0
             drugsType.push(...res.data)
         })
@@ -140,7 +140,7 @@ async function EDIT(url: String, data: any, operationId: Number) {
     }
 }
 
-CURRENCY_SELECT("drugsType").then(res => {
+CURRENCY_SELECT("drugsType")?.then(res => {
     drugsType.length = 0
     drugsType.push(...res.data)
 })

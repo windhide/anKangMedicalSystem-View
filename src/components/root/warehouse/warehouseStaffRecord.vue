@@ -127,27 +127,27 @@ const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '100px' // dialog中组件的宽度
 const URL = "warehouseStaffRecord" // 本组件内通用的url
 
-CURRENCY_SELECT("warehouse").then(res => {
+CURRENCY_SELECT("warehouse")?.then(res => {
     warehouseList.length = 0
     warehouseList.push(...res.data)
 })
 
-CURRENCY_SELECT("pharmacy").then(res => {
+CURRENCY_SELECT("pharmacy")?.then(res => {
     pharmacyList.length = 0
     pharmacyList.push(...res.data)
 })
 
-CURRENCY_SELECT("warehouseType").then(res => {
+CURRENCY_SELECT("warehouseType")?.then(res => {
     warehouseTypeList.length = 0
     warehouseTypeList.push(...res.data)
 })
 
-CURRENCY_SELECT("staff").then(res => {
+CURRENCY_SELECT("staff")?.then(res => {
     staffList.length = 0
     staffList.push(...res.data)
 })
 
-CURRENCY_SELECT("drugs").then(res => {
+CURRENCY_SELECT("drugs")?.then(res => {
     drugsList.length = 0;
     drugsList.push(...res.data)
 })
@@ -174,7 +174,7 @@ let warehouseAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT(URL).then(res => {
+        CURRENCY_SELECT(URL)?.then(res => {
             warehouseStaffRecordList.length = 0
             warehouseStaffRecordList.push(...res.data)
         })

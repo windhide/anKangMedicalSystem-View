@@ -60,13 +60,8 @@ const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '150px' // dialog中组件的宽度
 const URL = "warehouseType" // 本组件内通用的url
 
-CURRENCY_SELECT("warehouseType").then(res =>{
+CURRENCY_SELECT("warehouseType")?.then(res =>{
     warehouseTypeList.length = 0
-    warehouseTypeList.push(...res.data)
-})
-
-CURRENCY_SELECT("warehouseType").then(res =>{
-    warehouseTypeList.length = 0;
     warehouseTypeList.push(...res.data)
 })
 
@@ -81,7 +76,7 @@ let warehouseTypeAddForm = reactive({
 
 function RELOAD() {
     setTimeout((_: any) => {
-        CURRENCY_SELECT(URL).then(res => {
+        CURRENCY_SELECT(URL)?.then(res => {
             warehouseTypeList.length = 0
             warehouseTypeList.push(...res.data)
         })
