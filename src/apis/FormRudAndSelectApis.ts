@@ -12,7 +12,7 @@ export function CURRENCY_SELECT_BY_CONDITION(url: String,data: any) {
     if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
         setTimeout(() => {
             ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
-            if (router.currentRoute.value.path.indexOf("root")) {
+            if (router.currentRoute.value.path.indexOf("root") != -1) {
                 router.push("/rootlogin")
             } else {
                 router.push("/userLogin")
@@ -26,7 +26,8 @@ export function CURRENCY_SELECT_BY_CONDITION(url: String,data: any) {
         if (res.data.code == 2002) {
             setTimeout(() => {
                 ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
-                if (router.currentRoute.value.path.indexOf("root")) {
+                console.log(router.currentRoute.value.path)
+                if (router.currentRoute.value.path.indexOf("root") != -1) {
                     router.push("/rootlogin")
                 } else {
                     router.push("/userLogin")
@@ -42,12 +43,11 @@ export function CURRENCY_SELECT(url: String) {
     if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
         setTimeout(() => {
             ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
-            if (router.currentRoute.value.path.indexOf("root")) {
+            if (router.currentRoute.value.path.indexOf("root") != -1) {
                 router.push("/rootlogin")
             } else {
                 router.push("/userLogin")
             }
-
         }, 300);
         return
     }
@@ -55,8 +55,8 @@ export function CURRENCY_SELECT(url: String) {
         console.log(res.data)
         if (res.data.code == 2002) {
             setTimeout(() => {
-                ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
-                if (router.currentRoute.value.path.indexOf("root")) {
+                ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
+                if (router.currentRoute.value.path.indexOf("root") != -1) {
                     router.push("/rootlogin")
                 } else {
                     router.push("/userLogin")
