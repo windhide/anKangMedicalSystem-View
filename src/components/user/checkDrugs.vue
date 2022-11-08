@@ -31,6 +31,7 @@ import { reactive, ref } from 'vue'
 import { ShoppingCart } from '@element-plus/icons-vue'
 import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
 import { CURRENCY_REQUEST, CURRENCY_SELECT, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM, CURRENCY_SELECT_BY_CONDITION } from "@/apis/FormRudAndSelectApis"
+import { ADD_ITEM_TO_SHOPINGCAR } from '@/apis/shopingApi';
 
 
 let drugsList: any = reactive([])
@@ -53,7 +54,11 @@ CURRENCY_SELECT("drugsType")?.then(res => { // 赋值type
 })
 
 function ADD_SHOPCAR(data: any){
-
+    let dataCache: any = reactive({})
+    dataCache.count = 50
+    dataCache.drugs = data
+    dataCache.createTime = GET_NOW_DATE_FORMATE()
+    ADD_ITEM_TO_SHOPINGCAR(dataCache)
 }
 
 function queryDrugsName(){
