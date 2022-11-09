@@ -25,3 +25,34 @@ export function ADD_ITEM_TO_SHOPINGCAR(data:any){
         }
     })
 }
+
+export function SELECT_SHOPINGCAR(){
+    if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
+        setTimeout(() => {
+            ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
+            if (router.currentRoute.value.path.indexOf("root") != -1) {
+                router.push("/rootlogin")
+            } else {
+                router.push("/userLogin")
+            }
+        }, 300);
+        return
+    }
+    let userId = localStorage.getItem("userId")
+    let username = localStorage.getItem("username")
+
+    return axios.post("shopingCar/select",{"userKey":userId+"-"+username+"-car"}).then(res =>{
+        if (res.data.code == 2002) {
+            setTimeout(() => {
+                ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
+                if (router.currentRoute.value.path.indexOf("root") != -1) {
+                    router.push("/rootlogin")
+                } else {
+                    router.push("/userLogin")
+                }
+            }, 300);
+            return;
+        }
+        return res;
+    })
+}
