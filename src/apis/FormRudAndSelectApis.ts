@@ -22,11 +22,9 @@ export function CURRENCY_SELECT_BY_CONDITION(url: String,data: any) {
         return
     }
     return axios.post(url+"",data).then((res: any) => {
-        console.log(res.data)
         if (res.data.code == 2002) {
             setTimeout(() => {
                 ElMessage({ type: 'error', message: '登陆凭证已过期，跳转登录中', })
-                console.log(router.currentRoute.value.path)
                 if (router.currentRoute.value.path.indexOf("root") != -1) {
                     router.push("/rootlogin")
                 } else {
@@ -52,7 +50,6 @@ export function CURRENCY_SELECT(url: String) {
         return
     }
     return axios.post(url + "/select/list").then((res: any) => {
-        console.log(res.data)
         if (res.data.code == 2002) {
             setTimeout(() => {
                 ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
