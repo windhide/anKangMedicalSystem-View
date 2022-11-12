@@ -24,6 +24,24 @@
         <el-pagination v-if="SHOW_PAGINATION" background :page-size="pageSize" layout="prev, pager, next" :total="totals"
             :current-page="nowPage" hide-on-single-page @current-change="handleSizeChange" />
     </el-scrollbar>
+
+    <el-dialog v-model="addShopCarDialog" title="选择药品数量" style="width:500px" :before-close="stateShop">
+    <el-form>
+      <el-form-item label="选择数量" :label-width="formLabelWidth">
+        <el-input-number v-model="select_num" :step="2" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="stateShop(0)">取消</el-button>
+        <el-button type="primary" @click="stateShop(1)">
+          添加
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+
+
 </template>
 
 <script lang="ts" setup>
@@ -32,16 +50,21 @@ import { ShoppingCart } from '@element-plus/icons-vue'
 import { QUERY_DRUGS_FOR_LIST } from "@/apis/Drugs_Request"
 import { CURRENCY_REQUEST, CURRENCY_SELECT, CURRENCY_OPERATION_API, FORM_STATS_JUDGE, GET_NOW_DATE_FORMATE, CLEAR_FORM, CURRENCY_SELECT_BY_CONDITION } from "@/apis/FormRudAndSelectApis"
 import { ADD_ITEM_TO_SHOPINGCAR } from '@/apis/shopingApi';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 
 let drugsList: any = reactive([])
 let drugsType: any = reactive([])
 let drugsUnit: any = reactive([])
+let addShopCarDialog = ref(false)
+const formLabelWidth = '100px'
 let pageSize = ref(1); // 给初始值
 let totals = ref(1); // 给初始值
 let nowPage = ref(1);
 let drugsName = ref("")
 let SHOW_PAGINATION = ref(true);
+let select_num = ref(1)
+let dataCache: any = reactive({})
 
 CURRENCY_SELECT("drugsUnit")?.then(res => { // 赋值unit
     drugsUnit.length = 0
@@ -54,11 +77,23 @@ CURRENCY_SELECT("drugsType")?.then(res => { // 赋值type
 })
 
 function ADD_SHOPCAR(data: any){
-    let dataCache: any = reactive({})
+    dataCache = reactive({})
     dataCache.count = 50
     dataCache.drugs = data
     dataCache.createTime = GET_NOW_DATE_FORMATE()
-    ADD_ITEM_TO_SHOPINGCAR(dataCache)
+    addShopCarDialog.value = true
+}
+
+function stateShop(stateCode: number){
+    if(stateCode == 1){
+        dataCache.count = select_num.value;
+        ADD_ITEM_TO_SHOPINGCAR(dataCache)?.then(res =>{
+          if(res) addShopCarDialog.value = false
+        })
+    }else{
+        addShopCarDialog.value = false
+        ElMessage({ type: 'warning', message: '取消操作', })
+    }
 }
 
 function queryDrugsName(){

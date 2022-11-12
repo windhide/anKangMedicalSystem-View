@@ -1,8 +1,8 @@
 <template>
     <el-table :data="shopingCarList" stripe style="width: 100%">
-        <el-table-column prop="createTime" label="添加时间" width="230" />
-        <el-table-column prop="count" label="数量" width="100" />
         <el-table-column prop="drugs.drugsName" label="商品" width="500" />
+        <el-table-column prop="count" label="数量" width="100" />
+        <el-table-column prop="createTime" label="添加时间" width="230" />
         <el-table-column label="操作">
             <template #default="scope">
                 <el-button size="small" type="danger" @click="DELETE_SHOPING_CAR_ITEM(scope.$index, scope.row)">删除
