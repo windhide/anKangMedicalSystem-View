@@ -24,6 +24,8 @@ import shopingCar from "@/components/user/shopingCar.vue"
 import checkDrugs from "@/components/user/checkDrugs.vue"
 import userData from "@/components/user/userData.vue"
 import userSymptom from "@/components/user/userSymptom.vue"
+import checkOrder from "@/components/user/checkOrder.vue"
+
 
 
 export const routes: Array<RouteRecordRaw> = [
@@ -228,6 +230,14 @@ export const routes: Array<RouteRecordRaw> = [
             component: userSymptom,
             props: {
               icon: 'Document',
+            }
+          },
+          {
+            path:"checkOrder",
+            name:"查看订单",
+            component: checkOrder,
+            props:{
+              icon: 'List',
             }
           },
         ]
