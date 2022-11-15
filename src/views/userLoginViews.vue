@@ -75,7 +75,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
-	background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+	background: linear-gradient(123deg, #2E99B0 0%, #2E99B0 40%, #FCD77F calc(40% + 1px), #FCD77F 60%, #FF2E4C calc(60% + 1px), #FF2E4C 75%, #1E1548 calc(75% + 1px), #1E1548 100%);
 }
 
 .screen {
