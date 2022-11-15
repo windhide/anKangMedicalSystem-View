@@ -110,3 +110,27 @@ export function REMOVE_SHOPING_CAR_ITEM_API(drugsId:number){
         }
     })
 }
+
+export function CLEAR_SHOP_CAR(){
+    if (localStorage.getItem("username") == "" || localStorage.getItem("username") == null) {
+        setTimeout(() => {
+            ElMessage({ type: 'error', message: '没有登录！操作取消,请先登陆！', })
+            if (router.currentRoute.value.path.indexOf("root") != -1) {
+                router.push("/rootlogin")
+            } else {
+                router.push("/userLogin")
+            }
+        }, 300);
+        return
+    }
+    let userId = localStorage.getItem("userId")
+    let username = localStorage.getItem("username")
+
+    axios.post("shopingCar/removeAll",{"userKey":userId+"-"+username+"-car"}).then(res =>{
+        if(res.data){
+            ElMessage({ type: 'success', message: '购物车清空完成', })
+        }else{
+            ElMessage({ type: 'error', message: '因未知原因，失败。', })
+        }
+    })
+}
