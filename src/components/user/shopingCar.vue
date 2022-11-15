@@ -5,7 +5,7 @@
         <el-table-column prop="count" label="数量" width="100" />
         <el-table-column label="价格" width="120">
             <template #default="scope">
-                {{ scope.row.count * scope.row.drugs.drugsRetailPrice + "元" }}
+                {{ (scope.row.count * scope.row.drugs.drugsRetailPrice).toFixed(2) + "元" }}
             </template>
         </el-table-column>
         <el-table-column prop="createTime" label="添加时间" width="230" />
@@ -24,9 +24,9 @@
           <span>已选择详细</span>
         </div>
       <span style="margin-left: 0.5em" v-for="select in select_val"> {{select.drugs.drugsName + " - " + select.count + "个 - "+ select.count * select.drugs.drugsRetailPrice + "元"}}<br /></span>
-      <span style="margin-left: 1em"> 总计：{{ total }} 元</span>
+      <span style="margin-left: 1em"> 总计：{{ total.toFixed(2) }} 元</span>
       </template>
-      <el-button type="primary" round>去支付</el-button>
+      <el-button type="primary" round @click="PAY">去支付</el-button>
       <el-popconfirm v-if="shopingCarList.length != 0" 
           confirm-button-text="是的"
             cancel-button-text="取消"
@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-import { SELECT_SHOPINGCAR, CHANGE_SHOPING_CAR_ITEM_API, REMOVE_SHOPING_CAR_ITEM_API, CLEAR_SHOP_CAR } from '@/apis/shopingApi';
+import { SELECT_SHOPINGCAR, CHANGE_SHOPING_CAR_ITEM_API, REMOVE_SHOPING_CAR_ITEM_API, CLEAR_SHOP_CAR, PAY_CAR } from '@/apis/shopingApi';
 import { ElMessage } from 'element-plus';
 import { reactive, ref } from 'vue';
 import { InfoFilled } from '@element-plus/icons-vue'
@@ -126,6 +126,11 @@ const clearShopingCar = () =>{
   CLEAR_SHOP_CAR();
   ElMessage({ type: 'success', message: '操作完成', })
   setTimeout(reload, 200);
+}
+
+function PAY(){
+  PAY_CAR(select_val)
+  setTimeout(reload, 500);
 }
 reload()
 </script>
