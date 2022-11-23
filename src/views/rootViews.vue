@@ -57,7 +57,9 @@ import { getNavigation } from '@/apis/NavigationApis'
 import store from '@/store/index'
 import router from '@/router';
 
-const loginName = localStorage.getItem("username")
+let loginName:any = ""
+if(localStorage.getItem("Aunother") == undefined) loginName = ""
+else loginName = localStorage.getItem("Aunother")
 
 const NAVIGATION = getNavigation("root")
 
