@@ -76,7 +76,7 @@ function RELOAD() {
             drugsUnit.length = 0
             drugsUnit.push(...res.data)
         })
-    }, 100)
+    }, 300)
 }
 
 async function CURRENCY_CRUD(url: String, data: any, operationId: Number) {

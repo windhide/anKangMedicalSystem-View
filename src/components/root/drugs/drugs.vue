@@ -39,7 +39,7 @@
                 <el-input v-model="drugsEditForm.drugsSpecifications" autocomplete="off" />
             </el-form-item>
             <el-form-item label="药物单位" :label-width="formLabelWidth">
-                <el-select v-model="drugsEditForm.drugsUnitid" placeholder="选择药物单位">
+                <el-select v-model="drugsEditForm.drugsUnitId" placeholder="选择药物单位">
                     <el-option  v-for="drugsUnitOption in drugsUnit" :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
                 </el-select>
             </el-form-item>
@@ -78,7 +78,7 @@
                 <el-input v-model="drugsAddForm.drugsSpecifications" autocomplete="off" />
             </el-form-item>
             <el-form-item label="药物单位" :label-width="formLabelWidth">
-                <el-select v-model="drugsAddForm.drugsUnitid" placeholder="选择药物单位">
+                <el-select v-model="drugsAddForm.drugsUnitId" placeholder="选择药物单位">
                     <el-option v-for="drugsUnitOption in drugsUnit" :label=drugsUnitOption.drugsUnitName :value=drugsUnitOption.drugsUnitId />
                 </el-select>
             </el-form-item>
@@ -129,7 +129,7 @@ let drugsEditForm = reactive({
     drugsName: "",
     drugsTypeId: 0,
     drugsSpecifications: "",
-    drugsUnitid: 0,
+    drugsUnitId: 0,
     drugsPlace: "",
     drugsOriginPrice: 0,
     drugsRetailPrice: 0,
@@ -140,7 +140,7 @@ let drugsAddForm = reactive({
     drugsName: "",
     drugsTypeId: "",
     drugsSpecifications: "",
-    drugsUnitid: "",
+    drugsUnitId: "",
     drugsPlace: "",
     drugsOriginPrice: 0,
     drugsRetailPrice: 0,
@@ -199,7 +199,7 @@ async function EDIT(url: String, data: any, operationId: Number) {
         drugsEditForm.drugsName = data.drugsName
         drugsEditForm.drugsTypeId = data.drugsTypeId
         drugsEditForm.drugsSpecifications = data.drugsSpecifications
-        drugsEditForm.drugsUnitid = data.drugsUnitid
+        drugsEditForm.drugsUnitId = data.drugsUnitId
         drugsEditForm.drugsPlace = data.drugsPlace
         drugsEditForm.drugsOriginPrice = data.drugsOriginPrice
         drugsEditForm.drugsRetailPrice = data.drugsRetailPrice

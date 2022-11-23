@@ -8,7 +8,8 @@ module.exports = {
         port: 80, //端口
         proxy: {
             '/api': {
-                target: 'http://127.0.0.1:10010/', // 服务器server
+                // target: 'http://8.134.163.127:10010/', // 服务器server
+                target: 'http://localhost:10010/', // 服务器server
                 ws: false, // proxy websockets 
                 changeOrigin: true, // needed for virtual hosted sites
                 pathRewrite: {

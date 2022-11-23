@@ -199,7 +199,7 @@ async function CURRENCY_CRUD(url: String, data: any, operationId: Number) {
 }
 
 async function DELETE(url: String, data: any, operationId: Number) {
-    await CURRENCY_REQUEST(url, { warehouseId: data.warehouseId }, CURRENCY_OPERATION_API(operationId, TOSTRING(data)))
+    await CURRENCY_REQUEST(url, { warehouseStaffRecordId: data.warehouseStaffRecordId }, CURRENCY_OPERATION_API(operationId, TOSTRING(data)))
     RELOAD()
 }
 

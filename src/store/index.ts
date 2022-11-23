@@ -7,6 +7,7 @@ export default createStore({
     token: localStorage.getItem("refreshToken") ? localStorage.getItem("refreshToken") : '',
     userId: '',
     username: '',
+    Aunother: '',
   },
   getters: {
   },
@@ -30,6 +31,7 @@ export default createStore({
       localStorage.setItem('token', "")
       localStorage.setItem('userId', "")
       localStorage.setItem('username', "")
+      localStorage.setItem('Aunother', "")
     }
   },
   actions: {

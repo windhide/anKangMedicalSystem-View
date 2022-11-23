@@ -34,6 +34,7 @@ import { reactive } from 'vue';
 import store from '@/store/index'
 import router from '@/router/index'
 import { ElMessage } from 'element-plus';
+import { dataType } from 'element-plus/es/components/table-v2/src/common';
 const loginForm = reactive({
 	username: "",
 	password: "",
