@@ -13,7 +13,6 @@
             <el-table-column fixed="right" label="操作">
                 <template #header>
                     操作
-                    <el-button type="success" :icon="StarFilled" @click="ADD_DIALOG = true">添加</el-button>
                 </template>
                 <template #default="scope">
                     <el-button type="primary" :icon="ShoppingCart" circle @click="tableDrugsDetail(scope.row)" />
