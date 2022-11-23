@@ -25,6 +25,8 @@ import checkDrugs from "@/components/user/checkDrugs.vue"
 import userData from "@/components/user/userData.vue"
 import userSymptom from "@/components/user/userSymptom.vue"
 import checkOrder from "@/components/user/checkOrder.vue"
+import { ElNotification } from 'element-plus'
+import axios from 'axios'
 
 
 
@@ -233,10 +235,10 @@ export const routes: Array<RouteRecordRaw> = [
             }
           },
           {
-            path:"checkOrder",
-            name:"查看订单",
+            path: "checkOrder",
+            name: "查看订单",
             component: checkOrder,
-            props:{
+            props: {
               icon: 'List',
             }
           },
@@ -268,5 +270,57 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
+router.beforeEach((to, from, next) => {
+  const userId = localStorage.getItem('userId')
+  const userName = localStorage.getItem('username')
+  let Check
+
+  if (to.path.indexOf("/root/") != -1) {
+    // 如果非管理员用户跳转后台 则强行跳转
+    axios.post("staff/staffLogin", { staffId: userId }).then(res => {
+      if (res.data.staffUserName === userName) {
+        next()
+      } else {
+        ElNotification({title: '你不是管理员！,即将跳转！',type: 'warning'})
+        setTimeout(async function () {
+          await router.push("/")
+          await router.go(0)
+        }, 1000)
+      }
+    })
+  }
+  if (to.path.indexOf("/setting/") != -1 || to.path.indexOf("/shoping/") != -1) {
+    // 如果非管理员用户跳转后台 则强行跳转
+    axios.post("user/userLogin", { userId: userId }).then(res => {
+      if (res.data.userUserName === userName) {
+        next()
+      } else {
+        ElNotification({title: '员工不允许进入客户页面！,即将跳转！',type: 'warning'})
+        setTimeout(async function () {
+          await router.push("/root")
+          await router.go(0)
+        }, 1000)
+      }
+    })
+  }
+  if(to.path == "/root" && (localStorage.getItem("Aunother") == undefined || localStorage.getItem("Aunother") == "")){
+    axios.post("staff/staffLogin", { staffId: userId }).then(res => {
+      localStorage.setItem('Aunother', res.data.staffName)
+      next()
+      router.go(0)
+    })
+  }
+  if(to.path == "/" && (localStorage.getItem("Aunother") == undefined || localStorage.getItem("Aunother") == "")){
+    axios.post("user/userLogin", { userId: userId }).then(res => {
+      localStorage.setItem('Aunother', res.data.userName)
+      next()
+      router.go(0)
+    })
+  }
+    next()
+})
+
 
 export default router
