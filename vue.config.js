@@ -8,6 +8,7 @@ module.exports = {
         port: 80, //端口
         proxy: {
             '/api': {
+                // test push
                 // target: 'http://8.134.163.127:10010/', // 服务器server
                 target: 'http://localhost:10010/', // 服务器server
                 ws: false, // proxy websockets 
