@@ -1,7 +1,8 @@
 <template>
     <el-scrollbar>
         <el-table :data="purchaseRecordList" max-height="700">
-            <el-table-column prop="purchaseRecordId" label="订单编号" width="200" />
+            <!-- <el-table-column prop="purchaseRecordId" label="订单编号" width="200" /> -->
+            <el-table-column type="index" :index="indexMethod" />
             <el-table-column prop="staff.staffName" label="操作者" width="200" />
             <el-table-column label="订单价格" width="120">
                 <template #default="scope">
@@ -44,6 +45,10 @@ let purchaseRecordList: any = reactive([])
 let drawer = ref(false)
 let drugsDetail: any = reactive([])
 let total: any = ref(0)
+const indexMethod = (index: number) => {
+  return index + 1
+}
+
 function reload() {
     setTimeout(() => {
         SELECT_FOR_USER_PURCHASE_RECORD()?.then(res => {

@@ -53,7 +53,7 @@ export const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'drugs',
-        name: '药物管理',
+        name: '药品管理',
         props: {
           icon: 'FirstAidKit',
         },

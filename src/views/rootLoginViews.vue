@@ -4,7 +4,7 @@
 		<div class="screen">
 			<div class="screen__content">
 				<div class="login">
-					安康药房管理系统 - 后台
+					HIEU_DRUG药房管理系统 - 后台
 					<div class="login__field">
 						<input v-model="loginForm.username" type="text" class="login__input" placeholder="账号">
 					</div>

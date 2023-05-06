@@ -1,7 +1,8 @@
 <template>
     <el-scrollbar>
         <el-table :data="purchaseRecordList" max-height="700">
-            <el-table-column prop="purchaseRecordId" label="订单Id" width="150" />
+            <!-- <el-table-column prop="purchaseRecordId" label="订单Id" width="150" /> -->
+            <el-table-column type="index" :index="indexMethod" />
             <el-table-column prop="user.userName" label="购买者" width="100" />
             <el-table-column prop="staff.staffName" label="销售员工" width="100" />
             <el-table-column label="订单价格" width="120">
@@ -82,6 +83,10 @@ const EDIT_DIALOG = ref(false) // 修改dialog窗口开关
 const ADD_DIALOG = ref(false) // 添加dialog窗口开关
 const formLabelWidth = '100px' // dialog中组件的宽度
 const URL = "purchaseRecord" // 本组件内通用的url
+
+const indexMethod = (index: number) => {
+  return index + 1
+}
 
 CURRENCY_SELECT("user")?.then(res =>{
     userList.length = 0;
